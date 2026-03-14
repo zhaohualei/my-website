@@ -217,6 +217,71 @@
         .contact-box strong {
             color: var(--text-main);
         }
+
+        /* 产品图片网格 */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-top: 20px;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .product-card img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            display: block;
+        }
+        .product-card .card-label {
+            padding: 8px 10px;
+            font-size: 12px;
+            color: var(--text-sub);
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background: #fff;
+        }
+        /* 灯箱 */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox.open {
+            display: flex;
+        }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 28px;
+            color: #fff;
+            font-size: 40px;
+            cursor: pointer;
+            line-height: 1;
+            user-select: none;
+        }
     </style>
 </head>
 <body>
@@ -241,10 +306,10 @@
             <div class="menu-item" onclick="toggleSubMenu(this)">
                 <div class="menu-title">产品中心 ▾</div>
                 <ul class="sub-menu">
-                    <li onclick="switchPage('products', this, event)">玻璃陶瓷车针系列</li>
-                    <li onclick="switchPage('products', this, event)">氧化锆铣刀系列</li>
-                    <li onclick="switchPage('products', this, event)">PMMA/蜡块铣刀</li>
-                    <li onclick="switchPage('products', this, event)">配件与耗材</li>
+                    <li onclick="switchPage('prod-glass', this, event)">玻璃陶瓷车针系列</li>
+                    <li onclick="switchPage('prod-zirconia', this, event)">氧化锆铣刀系列</li>
+                    <li onclick="switchPage('prod-pmma', this, event)">PMMA/蜡块铣刀</li>
+                    <li onclick="switchPage('prod-accessories', this, event)">配件与耗材</li>
                 </ul>
             </div>
 
@@ -293,14 +358,65 @@
                 </p>
             </section>
 
-            <section id="products" class="page-section">
-                <h2 class="page-title">产品中心</h2>
-                <p>这里将集成 Swiper.js 实现的左右翻页轮播设计。单页产品卡片将展示产品大图、型号（如：12S 圆柱形玻璃陶瓷车针）、适配设备（如：Sirona MCXL）等详细信息。</p>
-                <div style="margin-top: 30px; border: 2px dashed #D4AF37; padding: 50px; text-align: center; background: #fff;">
-                    ◀ 产品轮播展示区占位 ▶<br><br>
-                    <button style="background: var(--primary-color); color: #fff; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer;">立即询价</button>
+            <!-- 玻璃陶瓷车针系列 -->
+            <section id="prod-glass" class="page-section">
+                <h2 class="page-title">玻璃陶瓷车针系列</h2>
+                <p style="color:var(--text-sub);margin-bottom:20px;">金刚石电镀工艺 · 适配西诺德、CEREC、普兰梅卡等主流设备</p>
+                <div class="product-grid">
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260225085717_220_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260225085717_220_3278.jpg" alt="西诺德MCXL"><div class="card-label">西诺德 MCXL 系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260220181110_108_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260220181110_108_3278.jpg" alt="西诺德MCXL实物"><div class="card-label">西诺德 MCXL 实物</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260220181128_109_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260220181128_109_3278.jpg" alt="CEREC3"><div class="card-label">CEREC3 系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260225085802_233_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260225085802_233_3278.jpg" alt="普兰梅卡"><div class="card-label">普兰梅卡 色环识别系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260225085715_219_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260225085715_219_3278.jpg" alt="VHF爱尔创"><div class="card-label">VHF / 爱尔创 DGA</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260225085728_222_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260225085728_222_3278.jpg" alt="吉尔巴赫"><div class="card-label">吉尔巴赫专用</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260225085729_223_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260225085729_223_3278.jpg" alt="ARUM"><div class="card-label">ARUM 系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260225085740_227_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260225085740_227_3278.jpg" alt="ARUM"><div class="card-label">ARUM 系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260225085727_221_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260225085727_221_3278.jpg" alt="登腾"><div class="card-label">登腾系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260225085732_226_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260225085732_226_3278.jpg" alt="登腾"><div class="card-label">登腾系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260225085647_215_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260225085647_215_3278.jpg" alt="威兰德"><div class="card-label">威兰德系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260225085656_216_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260225085656_216_3278.jpg" alt="柯乐德"><div class="card-label">柯乐德系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260225085705_217_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260225085705_217_3278.jpg" alt="泽康"><div class="card-label">泽康系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260225085715_218_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260225085715_218_3278.jpg" alt="也兰"><div class="card-label">也兰系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260220182522_120_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260220182522_120_3278.jpg" alt="兼容系列"><div class="card-label">多品牌兼容系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260220182526_121_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260220182526_121_3278.jpg" alt="兼容系列"><div class="card-label">多品牌兼容系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260220182535_122_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260220182535_122_3278.jpg" alt="兼容系列"><div class="card-label">多品牌兼容系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260220182608_123_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260220182608_123_3278.jpg" alt="色环识别"><div class="card-label">多系统色环识别系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260220182632_125_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260220182632_125_3278.jpg" alt="兼容系列"><div class="card-label">多品牌兼容系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260220182808_127_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260220182808_127_3278.jpg" alt="兼容系列"><div class="card-label">多品牌兼容系列</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/玻璃陶瓷车针系列/微信图片_20260220182814_128_3278.jpg')"><img src="imgs/玻璃陶瓷车针系列/微信图片_20260220182814_128_3278.jpg" alt="兼容系列"><div class="card-label">多品牌兼容系列</div></div>
                 </div>
             </section>
+
+            <!-- 氧化锆铣刀系列 -->
+            <section id="prod-zirconia" class="page-section">
+                <h2 class="page-title">氧化锆铣刀系列</h2>
+                <p style="color:var(--text-sub);margin-bottom:20px;">钨钢材质 · 专用涂层 · 适配西诺德、ARUM、翔通等主流设备</p>
+                <div class="product-grid">
+                    <div class="product-card" onclick="openLightbox('imgs/氧化锆铣刀系列/微信图片_20260220181202_111_3278.jpg')"><img src="imgs/氧化锆铣刀系列/微信图片_20260220181202_111_3278.jpg" alt="彩色涂层铣刀"><div class="card-label">彩色涂层铣刀组</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/氧化锆铣刀系列/微信图片_20260220181244_112_3278.jpg')"><img src="imgs/氧化锆铣刀系列/微信图片_20260220181244_112_3278.jpg" alt="多规格铣刀"><div class="card-label">多规格铣刀展示</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/氧化锆铣刀系列/微信图片_20260220181044_104_3278.jpg')"><img src="imgs/氧化锆铣刀系列/微信图片_20260220181044_104_3278.jpg" alt="产品阵列"><div class="card-label">产品规格阵列图</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/氧化锆铣刀系列/微信图片_20260220181054_107_3278.jpg')"><img src="imgs/氧化锆铣刀系列/微信图片_20260220181054_107_3278.jpg" alt="包装"><div class="card-label">产品包装展示</div></div>
+                    <div class="product-card" onclick="openLightbox('imgs/氧化锆铣刀系列/微信图片_20260220181145_110_3278.jpg')"><img src="imgs/氧化锆铣刀系列/微信图片_20260220181145_110_3278.jpg" alt="库存"><div class="card-label">现货库存储备</div></div>
+                </div>
+            </section>
+
+            <!-- PMMA/蜡块铣刀 -->
+            <section id="prod-pmma" class="page-section">
+                <h2 class="page-title">PMMA / 蜡块铣刀</h2>
+                <div style="margin-top:40px;border:2px dashed var(--border-color);padding:60px;text-align:center;background:#fff;border-radius:8px;color:var(--text-sub);">产品图片整理中，敬请期待</div>
+            </section>
+
+            <!-- 配件与耗材 -->
+            <section id="prod-accessories" class="page-section">
+                <h2 class="page-title">配件与耗材</h2>
+                <div style="margin-top:40px;border:2px dashed var(--border-color);padding:60px;text-align:center;background:#fff;border-radius:8px;color:var(--text-sub);">产品图片整理中，敬请期待</div>
+            </section>
+
+            <!-- 灯箱 -->
+            <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+                <span class="lightbox-close">&times;</span>
+                <img id="lightbox-img" src="" alt="产品大图">
+            </div>
 
             <section id="tech" class="page-section">
                 <h2 class="page-title">技术优势</h2>
@@ -361,6 +477,19 @@
             // 显示对应的 section，带上透明度渐变动画
             document.getElementById(pageId).classList.add('active');
         }
+
+        // 灯箱
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('open');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('open');
+        }
+        // 按 ESC 关闭灯箱
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
     </script>
 </body>
 </html>
