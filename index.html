@@ -205,17 +205,161 @@
             margin-bottom: 24px;
         }
 
-        /* 联系方式模块 */
+        /* 下载中心 */
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .download-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            transition: box-shadow 0.2s;
+        }
+        .download-card:hover { box-shadow: 0 4px 16px rgba(10,58,106,0.12); }
+        .download-icon {
+            font-size: 36px;
+            flex-shrink: 0;
+            line-height: 1;
+        }
+        .download-info { flex: 1; }
+        .download-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+        .download-desc {
+            font-size: 13px;
+            color: var(--text-sub);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+        .download-meta {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .file-badge {
+            background: #f0f7ff;
+            color: var(--primary-color);
+            border: 1px solid #b8d4f5;
+            border-radius: 3px;
+            font-size: 11px;
+            padding: 2px 8px;
+            font-weight: 700;
+        }
+        .btn-download {
+            padding: 5px 16px;
+            background: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-download:hover { background: #b8952a; }
+        .download-notice {
+            background: #fffbe6;
+            border: 1px solid #ffe58f;
+            border-radius: 6px;
+            padding: 14px 20px;
+            font-size: 13px;
+            color: #7d5400;
+        }
+
+        /* 联系我们 */
+        .contact-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
         .contact-box {
             background: #fff;
-            padding: 30px;
+            padding: 28px;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            line-height: 1.8;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            line-height: 2;
             color: var(--text-sub);
         }
-        .contact-box strong {
-            color: var(--text-main);
+        .contact-box h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        .contact-box .c-item { margin-bottom: 16px; }
+        .contact-box strong { color: var(--text-main); display: block; font-size: 13px; }
+        .contact-box span { font-size: 14px; }
+        .contact-form {
+            background: #fff;
+            border-radius: 8px;
+            padding: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .contact-form h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .form-group { display: flex; flex-direction: column; gap: 4px; }
+        .form-group label { font-size: 13px; color: var(--text-sub); }
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary-color);
+        }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-group.full { grid-column: 1 / -1; }
+        .btn-submit {
+            padding: 10px 36px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+            margin-top: 8px;
+        }
+        .btn-submit:hover { background: #0d4a88; }
+        .form-sent {
+            display: none;
+            background: #f6ffed;
+            border: 1px solid #b7eb8f;
+            border-radius: 6px;
+            padding: 12px 20px;
+            color: #389e0d;
+            font-size: 14px;
+            margin-top: 12px;
         }
 
         /* 技术优势 - 四宫格卡片 */
@@ -780,14 +924,137 @@
                     </div>
                 </div>
             </section>
-            <section id="download" class="page-section"><h2 class="page-title">下载中心</h2></section>
+            <section id="download" class="page-section">
+                <h2 class="page-title">下载中心</h2>
+
+                <div class="download-grid">
+                    <div class="download-card">
+                        <div class="download-icon">📋</div>
+                        <div class="download-info">
+                            <div class="download-title">产品目录</div>
+                            <div class="download-desc">全系列产品规格手册，包含玻璃陶瓷车针、氧化锆铣刀、PMMA铣刀等所有产品的详细参数与适配说明。</div>
+                            <div class="download-meta">
+                                <span class="file-badge">PDF</span>
+                                <a class="btn-download" href="#" onclick="showDownloadTip(event)">⬇ 下载</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="download-card">
+                        <div class="download-icon">📐</div>
+                        <div class="download-info">
+                            <div class="download-title">2025技术图册</div>
+                            <div class="download-desc">依据2025年最新发布的数字化耗材技术标准编制，覆盖车针尺寸、公差、涂层规格，可作为采购与质检的技术依据。</div>
+                            <div class="download-meta">
+                                <span class="file-badge">PDF</span>
+                                <a class="btn-download" href="#" onclick="showDownloadTip(event)">⬇ 下载</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="download-card">
+                        <div class="download-icon">🔗</div>
+                        <div class="download-info">
+                            <div class="download-title">设备兼容性对照表</div>
+                            <div class="download-desc">汇总15+主流切削设备与我司产品的完整兼容对照，支持按品牌/型号快速筛选，适合技工所日常备料参考。</div>
+                            <div class="download-meta">
+                                <span class="file-badge">PDF</span>
+                                <span class="file-badge">Excel</span>
+                                <a class="btn-download" href="#" onclick="showDownloadTip(event)">⬇ 下载</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="download-card">
+                        <div class="download-icon">📖</div>
+                        <div class="download-info">
+                            <div class="download-title">产品使用与保养指南</div>
+                            <div class="download-desc">车针使用规范、转速建议、冷却要求、保存条件及常见问题解答，帮助延长产品使用寿命。</div>
+                            <div class="download-meta">
+                                <span class="file-badge">PDF</span>
+                                <a class="btn-download" href="#" onclick="showDownloadTip(event)">⬇ 下载</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="download-notice" id="download-tip" style="display:none">
+                    📬 文件即将上线。如需立即获取请发送邮件至 <strong>stellarclouddental@163.com</strong>，我们将在1个工作日内回复。
+                </div>
+                <div class="download-notice">
+                    💡 提示：如需定制版兼容性对照表或特定设备的专项手册，请通过<a href="#" onclick="switchPage('contact',null,event)" style="color:var(--primary-color);font-weight:700">联系我们</a>页面提交需求。
+                </div>
+            </section>
 
             <section id="contact" class="page-section">
                 <h2 class="page-title">联系我们</h2>
-                <div class="contact-box">
-                    <p><strong>📍 公司地址：</strong><br>北京市门头沟区石龙工业区雅安路6号院1号楼C座3层306室</p><br>
-                    <p><strong>📧 邮箱：</strong><br>stellarclouddental@163.com</p><br>
-                    <p><strong>📞 电话：</strong><br>086-010-60869401</p>
+
+                <div class="contact-layout">
+                    <!-- 左：联系信息 -->
+                    <div class="contact-box">
+                        <h3>联系方式</h3>
+                        <div class="c-item">
+                            <strong>📍 公司地址</strong>
+                            <span>北京市门头沟区石龙工业区雅安路6号院1号楼C座3层306室</span>
+                        </div>
+                        <div class="c-item">
+                            <strong>📧 邮箱</strong>
+                            <span>stellarclouddental@163.com</span>
+                        </div>
+                        <div class="c-item">
+                            <strong>📞 电话</strong>
+                            <span>086-010-60869401</span>
+                        </div>
+                        <div class="c-item">
+                            <strong>🕐 服务时间</strong>
+                            <span>周一至周五 9:00 - 18:00</span>
+                        </div>
+                    </div>
+
+                    <!-- 右：询盘表单 -->
+                    <div class="contact-form">
+                        <h3>在线询价</h3>
+                        <form onsubmit="submitInquiry(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>姓名 *</label>
+                                    <input type="text" id="f-name" placeholder="您的姓名" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>公司名称</label>
+                                    <input type="text" id="f-company" placeholder="所在单位/机构">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>联系电话 *</label>
+                                    <input type="tel" id="f-phone" placeholder="手机或座机" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>电子邮箱</label>
+                                    <input type="email" id="f-email" placeholder="回复邮件地址">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group full">
+                                    <label>感兴趣的产品</label>
+                                    <select id="f-product">
+                                        <option value="">请选择</option>
+                                        <option>玻璃陶瓷车针系列</option>
+                                        <option>氧化锆铣刀系列</option>
+                                        <option>PMMA/蜡块铣刀</option>
+                                        <option>配件与耗材</option>
+                                        <option>多品类采购</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group full">
+                                    <label>留言</label>
+                                    <textarea id="f-message" placeholder="请描述您的需求、所用设备品牌/型号、采购数量等..."></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-submit">发送询价</button>
+                        </form>
+                        <div class="form-sent" id="form-sent">✅ 询价已提交！我们将在1个工作日内与您联系。</div>
+                    </div>
                 </div>
             </section>
 
@@ -916,6 +1183,29 @@
         });
 
         document.addEventListener('DOMContentLoaded', initCarousels);
+
+        function showDownloadTip(e) {
+            e.preventDefault();
+            const tip = document.getElementById('download-tip');
+            tip.style.display = 'block';
+            tip.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function submitInquiry(e) {
+            e.preventDefault();
+            const name = document.getElementById('f-name').value.trim();
+            const phone = document.getElementById('f-phone').value.trim();
+            if (!name || !phone) return;
+            // 组装 mailto（纯前端无后端时的简易方案）
+            const company = document.getElementById('f-company').value;
+            const email = document.getElementById('f-email').value;
+            const product = document.getElementById('f-product').value;
+            const msg = document.getElementById('f-message').value;
+            const body = encodeURIComponent(`姓名: ${name}\n公司: ${company}\n电话: ${phone}\n邮箱: ${email}\n产品: ${product}\n留言: ${msg}`);
+            window.location.href = `mailto:stellarclouddental@163.com?subject=询价%20-%20${encodeURIComponent(name)}&body=${body}`;
+            document.getElementById('form-sent').style.display = 'block';
+            e.target.reset();
+        }
 
         // === 设备兼容查询数据 ===
         const compatData = {
