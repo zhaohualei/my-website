@@ -62,7 +62,48 @@
 
         .header-actions span {
             cursor: pointer;
+            color: rgba(255,255,255,0.85);
+            transition: color 0.2s;
         }
+        .header-actions span:hover { color: var(--accent-color); }
+        /* 搜索框 */
+        .search-wrap { position: relative; display: flex; align-items: center; gap: 8px; }
+        .search-input {
+            width: 0; overflow: hidden; opacity: 0;
+            border: none; border-bottom: 2px solid rgba(255,255,255,0.5);
+            background: transparent; color: #fff; font-size: 13px;
+            padding: 0; outline: none;
+            transition: width 0.3s, opacity 0.3s, padding 0.3s;
+        }
+        .search-input.open { width: 180px; opacity: 1; padding: 2px 8px; }
+        .search-input::placeholder { color: rgba(255,255,255,0.4); }
+        .search-dropdown {
+            display: none; position: absolute; top: 40px; right: 0;
+            background: #fff; border-radius: 6px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15); min-width: 240px;
+            z-index: 1000; max-height: 300px; overflow-y: auto;
+        }
+        .search-dropdown.show { display: block; }
+        .search-result-item {
+            padding: 10px 14px; cursor: pointer; font-size: 13px; color: var(--text-main);
+            display: flex; align-items: center; gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .search-result-item:last-child { border-bottom: none; }
+        .search-result-item:hover { background: #f0f7ff; color: var(--primary-color); }
+        .search-result-cat {
+            font-size: 10px; background: #e8f0fe; color: var(--primary-color);
+            padding: 1px 6px; border-radius: 3px; flex-shrink: 0; font-weight: 700;
+        }
+        .search-empty { padding: 16px; text-align: center; font-size: 13px; color: var(--text-sub); }
+        /* 语言切换 */
+        .lang-toggle {
+            cursor: pointer; color: rgba(255,255,255,0.85);
+            border: 1px solid rgba(255,255,255,0.4); border-radius: 4px;
+            padding: 3px 10px; font-size: 13px; transition: all 0.2s;
+            user-select: none;
+        }
+        .lang-toggle:hover { color: var(--accent-color); border-color: var(--accent-color); }
 
         /* === 整体布局架构 === */
         .main-container {
@@ -689,8 +730,12 @@
             <span style="font-size: 28px;">✧</span> 星辰云创
         </div>
         <div class="header-actions">
-            <span>🔍 搜索</span>
-            <span>🌐 简/EN</span>
+            <div class="search-wrap">
+                <span id="search-btn" onclick="toggleSearch()">🔍 <span data-i18n="header-search">搜索</span></span>
+                <input class="search-input" id="search-input" placeholder="产品名/设备品牌..." oninput="runSearch(this.value)" onkeydown="handleSearchKey(event)">
+                <div class="search-dropdown" id="search-dropdown"></div>
+            </div>
+            <span class="lang-toggle" id="lang-toggle" onclick="switchLang()">🌐 EN</span>
             <span>📞 086-010-60869401</span>
         </div>
     </header>
@@ -698,30 +743,30 @@
     <div class="main-container">
         <nav class="sidebar">
             <div class="menu-item active" onclick="switchPage('about', this)">
-                <div class="menu-title">公司简介</div>
+                <div class="menu-title" data-i18n="nav-about">公司简介</div>
             </div>
             
             <div class="menu-item" onclick="toggleSubMenu(this)">
-                <div class="menu-title">产品中心 ▾</div>
+                <div class="menu-title" data-i18n="nav-products">产品中心 ▾</div>
                 <ul class="sub-menu">
-                    <li onclick="switchPage('prod-glass', this, event)">玻璃陶瓷车针系列</li>
-                    <li onclick="switchPage('prod-zirconia', this, event)">氧化锆铣刀系列</li>
-                    <li onclick="switchPage('prod-pmma', this, event)">PMMA/蜡块铣刀</li>
-                    <li onclick="switchPage('prod-accessories', this, event)">配件与耗材</li>
+                    <li onclick="switchPage('prod-glass', this, event)" data-i18n="nav-glass">玻璃陶瓷车针系列</li>
+                    <li onclick="switchPage('prod-zirconia', this, event)" data-i18n="nav-zirconia">氧化锆铣刀系列</li>
+                    <li onclick="switchPage('prod-pmma', this, event)" data-i18n="nav-pmma">PMMA/蜡块铣刀</li>
+                    <li onclick="switchPage('prod-accessories', this, event)" data-i18n="nav-accessories">配件与耗材</li>
                 </ul>
             </div>
 
             <div class="menu-item" onclick="switchPage('tech', this)">
-                <div class="menu-title">技术优势</div>
+                <div class="menu-title" data-i18n="nav-tech">技术优势</div>
             </div>
             <div class="menu-item" onclick="switchPage('compatibility', this)">
-                <div class="menu-title">设备兼容</div>
+                <div class="menu-title" data-i18n="nav-compat">设备兼容</div>
             </div>
             <div class="menu-item" onclick="switchPage('download', this)">
-                <div class="menu-title">下载中心</div>
+                <div class="menu-title" data-i18n="nav-download">下载中心</div>
             </div>
             <div class="menu-item" onclick="switchPage('contact', this)">
-                <div class="menu-title">联系我们</div>
+                <div class="menu-title" data-i18n="nav-contact">联系我们</div>
             </div>
         </nav>
 
@@ -734,7 +779,7 @@
                         <p style="font-size: 18px; opacity: 0.8;">星辰云创 · 助力技工所降低单颗修复成本</p>
                     </div>
                 </div>
-                <h2 class="page-title">公司简介</h2>
+                <h2 class="page-title" data-i18n="title-about">公司简介</h2>
                 <div class="data-cards">
                     <div class="card">
                         <div class="card-value">8年+</div>
@@ -758,7 +803,7 @@
 
             <!-- 玻璃陶瓷车针系列 -->
             <section id="prod-glass" class="page-section">
-                <h2 class="page-title">玻璃陶瓷车针系列</h2>
+                <h2 class="page-title" data-i18n="title-glass">玻璃陶瓷车针系列</h2>
                 <p style="color:var(--text-sub);margin-bottom:20px;">金刚石电镀工艺 · 适配西诺德、CEREC、普兰梅卡等主流设备</p>
                 <div class="carousel-wrap">
                     <div class="carousel-main" onclick="openLightbox(carousels.glass.items[carousels.glass.idx].src)">
@@ -776,7 +821,7 @@
 
             <!-- 氧化锆铣刀系列 -->
             <section id="prod-zirconia" class="page-section">
-                <h2 class="page-title">氧化锆铣刀系列</h2>
+                <h2 class="page-title" data-i18n="title-zirconia">氧化锆铣刀系列</h2>
                 <p style="color:var(--text-sub);margin-bottom:20px;">钨钢材质 · 专用涂层 · 适配西诺德、ARUM、翔通等主流设备</p>
                 <div class="carousel-wrap">
                     <div class="carousel-main" onclick="openLightbox(carousels.zirconia.items[carousels.zirconia.idx].src)">
@@ -794,13 +839,13 @@
 
             <!-- PMMA/蜡块铣刀 -->
             <section id="prod-pmma" class="page-section">
-                <h2 class="page-title">PMMA / 蜡块铣刀</h2>
+                <h2 class="page-title" data-i18n="title-pmma">PMMA / 蜡块铣刀</h2>
                 <div style="margin-top:40px;border:2px dashed var(--border-color);padding:60px;text-align:center;background:#fff;border-radius:8px;color:var(--text-sub);">产品图片整理中，敬请期待</div>
             </section>
 
             <!-- 配件与耗材 -->
             <section id="prod-accessories" class="page-section">
-                <h2 class="page-title">配件与耗材</h2>
+                <h2 class="page-title" data-i18n="title-accessories">配件与耗材</h2>
                 <div style="margin-top:40px;border:2px dashed var(--border-color);padding:60px;text-align:center;background:#fff;border-radius:8px;color:var(--text-sub);">产品图片整理中，敬请期待</div>
             </section>
 
@@ -811,7 +856,7 @@
             </div>
 
             <section id="tech" class="page-section">
-                <h2 class="page-title">技术优势</h2>
+                <h2 class="page-title" data-i18n="title-tech">技术优势</h2>
 
                 <!-- 四宫格技术卡片 -->
                 <div class="tech-grid">
@@ -873,11 +918,11 @@
             </section>
 
             <section id="compatibility" class="page-section">
-                <h2 class="page-title">设备兼容查询</h2>
+                <h2 class="page-title" data-i18n="title-compat">设备兼容查询</h2>
 
                 <!-- 查询栏 -->
                 <div class="compat-query-bar">
-                    <label>设备品牌</label>
+                    <label data-i18n="compat-brand-lbl">设备品牌</label>
                     <select id="compat-brand" onchange="updateModelSelect()">
                         <option value="">请选择品牌</option>
                         <option value="sirona">西诺德 Sirona</option>
@@ -896,12 +941,12 @@
                         <option value="aim">AIM</option>
                         <option value="xiangtong">翔通</option>
                     </select>
-                    <label>设备型号</label>
+                    <label data-i18n="compat-model-lbl">设备型号</label>
                     <select id="compat-model">
                         <option value="">请先选择品牌</option>
                     </select>
-                    <button class="btn-query" onclick="runCompatQuery()">🔍 查询</button>
-                    <button class="btn-reset" onclick="resetCompatQuery()">重置</button>
+                    <button class="btn-query" onclick="runCompatQuery()" data-i18n="btn-query">🔍 查询</button>
+                    <button class="btn-reset" onclick="resetCompatQuery()" data-i18n="btn-reset">重置</button>
                 </div>
 
                 <!-- 查询结果 -->
@@ -911,7 +956,7 @@
 
                 <!-- 品牌墙 -->
                 <div class="brand-wall">
-                    <h3>🏭 覆盖主流设备品牌（点击快速查询）</h3>
+                    <h3 data-i18n="brand-wall-title">🏭 覆盖主流设备品牌（点击快速查询）</h3>
                     <div class="brand-grid">
                         <div class="brand-item" onclick="quickQuery('sirona','MCXL')"><div class="brand-name">西诺德 Sirona</div><div class="brand-sub">MCXL · inLab MC X5</div></div>
                         <div class="brand-item" onclick="quickQuery('roland','DWX-52D')"><div class="brand-name">罗兰 Roland</div><div class="brand-sub">DWX-42W · DWX-52D</div></div>
@@ -925,7 +970,7 @@
                 </div>
             </section>
             <section id="download" class="page-section">
-                <h2 class="page-title">下载中心</h2>
+                <h2 class="page-title" data-i18n="title-download">下载中心</h2>
 
                 <div class="download-grid">
                     <div class="download-card">
@@ -984,12 +1029,12 @@
             </section>
 
             <section id="contact" class="page-section">
-                <h2 class="page-title">联系我们</h2>
+                <h2 class="page-title" data-i18n="title-contact">联系我们</h2>
 
                 <div class="contact-layout">
                     <!-- 左：联系信息 -->
                     <div class="contact-box">
-                        <h3>联系方式</h3>
+                        <h3 data-i18n="contact-info-title">联系方式</h3>
                         <div class="c-item">
                             <strong>📍 公司地址</strong>
                             <span>北京市门头沟区石龙工业区雅安路6号院1号楼C座3层306室</span>
@@ -1010,7 +1055,7 @@
 
                     <!-- 右：询盘表单 -->
                     <div class="contact-form">
-                        <h3>在线询价</h3>
+                        <h3 data-i18n="inquiry-title">在线询价</h3>
                         <form onsubmit="submitInquiry(event)">
                             <div class="form-row">
                                 <div class="form-group">
@@ -1051,7 +1096,7 @@
                                     <textarea id="f-message" placeholder="请描述您的需求、所用设备品牌/型号、采购数量等..."></textarea>
                                 </div>
                             </div>
-                            <button type="submit" class="btn-submit">发送询价</button>
+                            <button type="submit" class="btn-submit" data-i18n="btn-submit">发送询价</button>
                         </form>
                         <div class="form-sent" id="form-sent">✅ 询价已提交！我们将在1个工作日内与您联系。</div>
                     </div>
@@ -1182,7 +1227,7 @@
             }
         });
 
-        document.addEventListener('DOMContentLoaded', initCarousels);
+        document.addEventListener('DOMContentLoaded', () => { initCarousels(); applyLang(); });
 
         function showDownloadTip(e) {
             e.preventDefault();
@@ -1308,6 +1353,185 @@
             document.querySelectorAll('.brand-item').forEach(el => el.classList.remove('selected'));
             event.currentTarget.classList.add('selected');
             document.getElementById('compatibility').querySelector('.compat-query-bar').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // === 搜索功能 ===
+        const searchIndex = [
+            { label: '公司简介', en: 'About Us', page: 'about', cat: '页面' },
+            { label: '玻璃陶瓷车针系列', en: 'Glass-Ceramic Burs', page: 'prod-glass', cat: '产品' },
+            { label: '氧化锆铣刀系列', en: 'Zirconia Milling Cutters', page: 'prod-zirconia', cat: '产品' },
+            { label: 'PMMA/蜡块铣刀', en: 'PMMA Cutters', page: 'prod-pmma', cat: '产品' },
+            { label: '配件与耗材', en: 'Accessories', page: 'prod-accessories', cat: '产品' },
+            { label: '技术优势', en: 'Technology', page: 'tech', cat: '页面' },
+            { label: '设备兼容', en: 'Compatibility', page: 'compatibility', cat: '页面' },
+            { label: '下载中心', en: 'Downloads', page: 'download', cat: '页面' },
+            { label: '联系我们', en: 'Contact Us', page: 'contact', cat: '页面' },
+            { label: '西诺德 Sirona', en: 'Sirona', page: 'compatibility', cat: '品牌' },
+            { label: '罗兰 Roland', en: 'Roland', page: 'compatibility', cat: '品牌' },
+            { label: '普兰梅卡 Planmeca', en: 'Planmeca', page: 'compatibility', cat: '品牌' },
+            { label: '威兰德 Wieland', en: 'Wieland', page: 'compatibility', cat: '品牌' },
+            { label: '吉尔巴赫 Amann Girrbach', en: 'Amann Girrbach', page: 'compatibility', cat: '品牌' },
+            { label: '登腾 Dentium', en: 'Dentium', page: 'compatibility', cat: '品牌' },
+            { label: 'VHF', en: 'VHF', page: 'compatibility', cat: '品牌' },
+            { label: 'ARUM', en: 'ARUM', page: 'compatibility', cat: '品牌' },
+            ...carousels.glass.items.map(i => ({ label: i.label, en: i.label, page: 'prod-glass', cat: '玻璃陶瓷' })),
+            ...carousels.zirconia.items.map(i => ({ label: i.label, en: i.label, page: 'prod-zirconia', cat: '氧化锆' })),
+        ];
+
+        let searchOpen = false;
+
+        function toggleSearch() {
+            const input = document.getElementById('search-input');
+            const dropdown = document.getElementById('search-dropdown');
+            searchOpen = !searchOpen;
+            if (searchOpen) {
+                input.classList.add('open');
+                setTimeout(() => input.focus(), 50);
+            } else {
+                input.classList.remove('open');
+                input.value = '';
+                dropdown.classList.remove('show');
+                dropdown.innerHTML = '';
+            }
+        }
+
+        function runSearch(q) {
+            const dropdown = document.getElementById('search-dropdown');
+            q = q.trim().toLowerCase();
+            if (!q) { dropdown.classList.remove('show'); dropdown.innerHTML = ''; return; }
+            const results = searchIndex.filter(item =>
+                item.label.toLowerCase().includes(q) || item.en.toLowerCase().includes(q)
+            ).slice(0, 8);
+            if (results.length === 0) {
+                dropdown.innerHTML = '<div class="search-empty">无匹配结果 / No results</div>';
+            } else {
+                dropdown.innerHTML = results.map(r =>
+                    `<div class="search-result-item" onclick="searchGoto('${r.page}')">
+                        <span class="search-result-cat">${r.cat}</span>
+                        <span>${r.label}</span>
+                    </div>`
+                ).join('');
+            }
+            dropdown.classList.add('show');
+        }
+
+        function handleSearchKey(e) {
+            if (e.key === 'Escape') { closeSearch(); return; }
+            if (e.key === 'Enter') {
+                const q = e.target.value.trim().toLowerCase();
+                const match = searchIndex.find(item =>
+                    item.label.toLowerCase().includes(q) || item.en.toLowerCase().includes(q)
+                );
+                if (match) searchGoto(match.page);
+            }
+        }
+
+        function searchGoto(pageId) {
+            const li = document.querySelector(`li[onclick*="'${pageId}'"]`);
+            if (li) { li.click(); }
+            else {
+                const mi = document.querySelector(`.menu-item[onclick*="'${pageId}'"]`);
+                if (mi) mi.click(); else switchPage(pageId, null);
+            }
+            closeSearch();
+        }
+
+        function closeSearch() {
+            const input = document.getElementById('search-input');
+            const dropdown = document.getElementById('search-dropdown');
+            searchOpen = false;
+            input.classList.remove('open');
+            input.value = '';
+            dropdown.classList.remove('show');
+            dropdown.innerHTML = '';
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-wrap')) closeSearch();
+        });
+
+        // === 语言切换 (i18n) ===
+        const i18n = {
+            zh: {
+                'header-search': '搜索',
+                'nav-about': '公司简介',
+                'nav-products': '产品中心 ▾',
+                'nav-glass': '玻璃陶瓷车针系列',
+                'nav-zirconia': '氧化锆铣刀系列',
+                'nav-pmma': 'PMMA/蜡块铣刀',
+                'nav-accessories': '配件与耗材',
+                'nav-tech': '技术优势',
+                'nav-compat': '设备兼容',
+                'nav-download': '下载中心',
+                'nav-contact': '联系我们',
+                'title-about': '公司简介',
+                'title-glass': '玻璃陶瓷车针系列',
+                'title-zirconia': '氧化锆铣刀系列',
+                'title-pmma': 'PMMA / 蜡块铣刀',
+                'title-accessories': '配件与耗材',
+                'title-tech': '技术优势',
+                'title-compat': '设备兼容查询',
+                'title-download': '下载中心',
+                'title-contact': '联系我们',
+                'compat-brand-lbl': '设备品牌',
+                'compat-model-lbl': '设备型号',
+                'btn-query': '🔍 查询',
+                'btn-reset': '重置',
+                'btn-submit': '发送询价',
+                'brand-wall-title': '🏭 覆盖主流设备品牌（点击快速查询）',
+                'contact-info-title': '联系方式',
+                'inquiry-title': '在线询价',
+            },
+            en: {
+                'header-search': 'Search',
+                'nav-about': 'About Us',
+                'nav-products': 'Products ▾',
+                'nav-glass': 'Glass-Ceramic Burs',
+                'nav-zirconia': 'Zirconia Cutters',
+                'nav-pmma': 'PMMA Cutters',
+                'nav-accessories': 'Accessories',
+                'nav-tech': 'Technology',
+                'nav-compat': 'Compatibility',
+                'nav-download': 'Downloads',
+                'nav-contact': 'Contact',
+                'title-about': 'About Us',
+                'title-glass': 'Glass-Ceramic Bur Series',
+                'title-zirconia': 'Zirconia Milling Cutter Series',
+                'title-pmma': 'PMMA / Wax Cutters',
+                'title-accessories': 'Accessories & Consumables',
+                'title-tech': 'Technology Advantages',
+                'title-compat': 'Device Compatibility Query',
+                'title-download': 'Downloads',
+                'title-contact': 'Contact Us',
+                'compat-brand-lbl': 'Device Brand',
+                'compat-model-lbl': 'Device Model',
+                'btn-query': '🔍 Search',
+                'btn-reset': 'Reset',
+                'btn-submit': 'Send Inquiry',
+                'brand-wall-title': '🏭 Compatible with Major Device Brands',
+                'contact-info-title': 'Contact Info',
+                'inquiry-title': 'Online Inquiry',
+            }
+        };
+
+        let currentLang = localStorage.getItem('sc-lang') || 'zh';
+
+        function applyLang() {
+            const dict = i18n[currentLang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (dict[key] !== undefined) el.textContent = dict[key];
+            });
+            const toggle = document.getElementById('lang-toggle');
+            if (toggle) toggle.textContent = currentLang === 'zh' ? '🌐 EN' : '🌐 中';
+            const inp = document.getElementById('search-input');
+            if (inp) inp.placeholder = currentLang === 'zh' ? '产品名/设备品牌...' : 'Product / Brand...';
+        }
+
+        function switchLang() {
+            currentLang = currentLang === 'zh' ? 'en' : 'zh';
+            localStorage.setItem('sc-lang', currentLang);
+            applyLang();
         }
     </script>
 </body>
