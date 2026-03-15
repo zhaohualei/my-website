@@ -298,6 +298,134 @@
         }
         .micro-grid img:hover { transform: scale(1.04); }
 
+        /* 设备兼容查询页 */
+        .compat-query-bar {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            background: #fff;
+            padding: 20px 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        .compat-query-bar label {
+            font-size: 14px;
+            color: var(--text-sub);
+            white-space: nowrap;
+        }
+        .compat-query-bar select {
+            padding: 8px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            color: var(--text-main);
+            background: #f8f9fa;
+            cursor: pointer;
+            outline: none;
+            min-width: 160px;
+        }
+        .compat-query-bar select:focus { border-color: var(--primary-color); }
+        .btn-query {
+            padding: 8px 24px;
+            background: var(--primary-color);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-query:hover { background: #0d4a88; }
+        .btn-reset {
+            padding: 8px 16px;
+            background: #fff;
+            color: var(--text-sub);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .btn-reset:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .compat-result {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            margin-bottom: 24px;
+            min-height: 120px;
+        }
+        .compat-result-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-color);
+        }
+        .compat-result-empty {
+            color: var(--text-sub);
+            font-size: 14px;
+            text-align: center;
+            padding: 24px 0;
+        }
+        .compat-product-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .compat-tag {
+            background: #f0f7ff;
+            border: 1px solid #b8d4f5;
+            color: var(--primary-color);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+        .compat-tag::before { content: '✓ '; color: #52C41A; font-weight: 700; }
+        /* 品牌墙 */
+        .brand-wall {
+            background: #fff;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .brand-wall h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 18px;
+        }
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+        .brand-item {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .brand-item:hover, .brand-item.selected {
+            border-color: var(--accent-color);
+            background: #fffbf0;
+            box-shadow: 0 2px 8px rgba(212,175,55,0.2);
+        }
+        .brand-item .brand-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 4px;
+        }
+        .brand-item .brand-sub {
+            font-size: 12px;
+            color: var(--text-sub);
+        }
+
         /* 轮播器 */
         .carousel-wrap { position: relative; }
         .carousel-main {
@@ -600,7 +728,58 @@
                 </div>
             </section>
 
-            <section id="compatibility" class="page-section"><h2 class="page-title">设备兼容查询表</h2></section>
+            <section id="compatibility" class="page-section">
+                <h2 class="page-title">设备兼容查询</h2>
+
+                <!-- 查询栏 -->
+                <div class="compat-query-bar">
+                    <label>设备品牌</label>
+                    <select id="compat-brand" onchange="updateModelSelect()">
+                        <option value="">请选择品牌</option>
+                        <option value="sirona">西诺德 Sirona</option>
+                        <option value="roland">罗兰 Roland</option>
+                        <option value="amann">阿曼吉尔巴赫 Amann Girrbach</option>
+                        <option value="planmeca">普兰梅卡 Planmeca</option>
+                        <option value="vhf">VHF</option>
+                        <option value="arum">ARUM</option>
+                        <option value="dentium">登腾 Dentium</option>
+                        <option value="imes">Imes-icore</option>
+                        <option value="wieland">威兰德 Wieland</option>
+                        <option value="coritec">柯乐德 Coritec</option>
+                        <option value="zirkonzahn">泽康 Zirkonzahn</option>
+                        <option value="yenadent">也兰 Yenadent</option>
+                        <option value="shendia">申雕 Shendia</option>
+                        <option value="aim">AIM</option>
+                        <option value="xiangtong">翔通</option>
+                    </select>
+                    <label>设备型号</label>
+                    <select id="compat-model">
+                        <option value="">请先选择品牌</option>
+                    </select>
+                    <button class="btn-query" onclick="runCompatQuery()">🔍 查询</button>
+                    <button class="btn-reset" onclick="resetCompatQuery()">重置</button>
+                </div>
+
+                <!-- 查询结果 -->
+                <div class="compat-result" id="compat-result">
+                    <div class="compat-result-empty">请选择设备品牌和型号后点击查询</div>
+                </div>
+
+                <!-- 品牌墙 -->
+                <div class="brand-wall">
+                    <h3>🏭 覆盖主流设备品牌（点击快速查询）</h3>
+                    <div class="brand-grid">
+                        <div class="brand-item" onclick="quickQuery('sirona','MCXL')"><div class="brand-name">西诺德 Sirona</div><div class="brand-sub">MCXL · inLab MC X5</div></div>
+                        <div class="brand-item" onclick="quickQuery('roland','DWX-52D')"><div class="brand-name">罗兰 Roland</div><div class="brand-sub">DWX-42W · DWX-52D</div></div>
+                        <div class="brand-item" onclick="quickQuery('amann','CERAMILL')"><div class="brand-name">吉尔巴赫</div><div class="brand-sub">Ceramill Motion 2</div></div>
+                        <div class="brand-item" onclick="quickQuery('planmeca','PlanMill40')"><div class="brand-name">普兰梅卡</div><div class="brand-sub">PlanMill 40 · 30S</div></div>
+                        <div class="brand-item" onclick="quickQuery('vhf','R5')"><div class="brand-name">VHF</div><div class="brand-sub">R5 · S1 · CAM</div></div>
+                        <div class="brand-item" onclick="quickQuery('arum','5X-300')"><div class="brand-name">ARUM</div><div class="brand-sub">5X-300 · 5X-400</div></div>
+                        <div class="brand-item" onclick="quickQuery('wieland','ZENOTEC')"><div class="brand-name">威兰德 Wieland</div><div class="brand-sub">Zenotec select</div></div>
+                        <div class="brand-item" onclick="quickQuery('dentium','ARABELLE')"><div class="brand-name">登腾 Dentium</div><div class="brand-sub">Arabelle</div></div>
+                    </div>
+                </div>
+            </section>
             <section id="download" class="page-section"><h2 class="page-title">下载中心</h2></section>
 
             <section id="contact" class="page-section">
@@ -737,6 +916,109 @@
         });
 
         document.addEventListener('DOMContentLoaded', initCarousels);
+
+        // === 设备兼容查询数据 ===
+        const compatData = {
+            sirona: {
+                models: { 'MCXL': ['12S 圆柱形车针', '12EF 尖形车针', 'Step Bur 12', 'Cylinder 12EF', 'Pointed Bur', 'Cone Bur 12/14'], 'inLab MC X5': ['Shaper 25', 'Shaper 25 RZ', 'Finisher 10', '氧化锆研磨车针 0°/2°/4°'] }
+            },
+            roland: {
+                models: { 'DWX-52D': ['DGA52 车针系列', '多品牌兼容系列'], 'DWX-42W': ['DGA42 车针系列', '多品牌兼容系列'] }
+            },
+            amann: {
+                models: { 'CERAMILL': ['吉尔巴赫专用车针', '色环识别系列', '多品牌兼容系列'] }
+            },
+            planmeca: {
+                models: { 'PlanMill40': ['普兰梅卡色环识别系列', '蓝/黄/白色环系列'], 'PlanMill30S': ['普兰梅卡色环识别系列'] }
+            },
+            vhf: {
+                models: { 'R5': ['VHF/爱尔创 DGA 车针', '多品牌兼容系列'], 'S1': ['VHF/爱尔创 DGA 车针'] }
+            },
+            arum: {
+                models: { '5X-300': ['ARUM 系列车针', '多品牌兼容系列'], '5X-400': ['ARUM 系列车针'] }
+            },
+            dentium: {
+                models: { 'ARABELLE': ['登腾系列车针', '多品牌兼容系列'] }
+            },
+            imes: {
+                models: { 'iCore350i': ['多品牌兼容系列'] }
+            },
+            wieland: {
+                models: { 'ZENOTEC': ['威兰德系列车针', '多品牌兼容系列'] }
+            },
+            coritec: {
+                models: { '450i': ['柯乐德系列车针', '多品牌兼容系列'] }
+            },
+            zirkonzahn: {
+                models: { 'M1': ['泽康系列车针', '多品牌兼容系列'] }
+            },
+            yenadent: {
+                models: { 'D60': ['也兰系列车针', '多品牌兼容系列'] }
+            },
+            shendia: {
+                models: { 'SD-500': ['申雕系列车针', '多品牌兼容系列'] }
+            },
+            aim: {
+                models: { 'AIM350': ['AIM 系列车针', '多品牌兼容系列'] }
+            },
+            xiangtong: {
+                models: { 'XT-D6': ['翔通系列车针', '多品牌兼容系列'] }
+            }
+        };
+
+        function updateModelSelect() {
+            const brand = document.getElementById('compat-brand').value;
+            const modelSel = document.getElementById('compat-model');
+            modelSel.innerHTML = '';
+            if (!brand || !compatData[brand]) {
+                modelSel.innerHTML = '<option value="">请先选择品牌</option>';
+                return;
+            }
+            modelSel.innerHTML = '<option value="">请选择型号</option>';
+            Object.keys(compatData[brand].models).forEach(m => {
+                const opt = document.createElement('option');
+                opt.value = m; opt.textContent = m;
+                modelSel.appendChild(opt);
+            });
+        }
+
+        function runCompatQuery() {
+            const brand = document.getElementById('compat-brand').value;
+            const model = document.getElementById('compat-model').value;
+            const resultEl = document.getElementById('compat-result');
+            if (!brand || !model) {
+                resultEl.innerHTML = '<div class="compat-result-empty">请选择设备品牌和型号后点击查询</div>';
+                return;
+            }
+            const products = compatData[brand]?.models[model];
+            const brandName = document.getElementById('compat-brand').options[document.getElementById('compat-brand').selectedIndex].text;
+            if (!products || products.length === 0) {
+                resultEl.innerHTML = '<div class="compat-result-empty">暂无该型号的兼容数据，请联系我们获取支持</div>';
+                return;
+            }
+            const tags = products.map(p => `<span class="compat-tag">${p}</span>`).join('');
+            resultEl.innerHTML = `<div class="compat-result-title">📋 ${brandName} · ${model} — 可用产品（${products.length} 款）</div><div class="compat-product-tags">${tags}</div>`;
+            // 高亮品牌墙
+            document.querySelectorAll('.brand-item').forEach(el => el.classList.remove('selected'));
+        }
+
+        function resetCompatQuery() {
+            document.getElementById('compat-brand').value = '';
+            document.getElementById('compat-model').innerHTML = '<option value="">请先选择品牌</option>';
+            document.getElementById('compat-result').innerHTML = '<div class="compat-result-empty">请选择设备品牌和型号后点击查询</div>';
+            document.querySelectorAll('.brand-item').forEach(el => el.classList.remove('selected'));
+        }
+
+        function quickQuery(brandKey, modelKey) {
+            const brandSel = document.getElementById('compat-brand');
+            brandSel.value = brandKey;
+            updateModelSelect();
+            document.getElementById('compat-model').value = modelKey;
+            runCompatQuery();
+            document.querySelectorAll('.brand-item').forEach(el => el.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            document.getElementById('compatibility').querySelector('.compat-query-bar').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
     </script>
 </body>
 </html>
