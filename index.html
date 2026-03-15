@@ -218,6 +218,86 @@
             color: var(--text-main);
         }
 
+        /* 技术优势 - 四宫格卡片 */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .tech-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 32px 28px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            border: 1px solid var(--border-color);
+            border-top: 3px solid var(--accent-color);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .tech-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+        }
+        .tech-card-icon { font-size: 36px; margin-bottom: 14px; }
+        .tech-card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        .tech-card-desc { font-size: 14px; color: var(--text-sub); line-height: 1.8; }
+        /* 技术对比表 */
+        .tech-compare {
+            background: #fff;
+            border-radius: 10px;
+            padding: 28px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+            margin-bottom: 32px;
+        }
+        .tech-compare h3 {
+            font-size: 18px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .compare-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        .compare-table th {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 12px 16px;
+            text-align: center;
+        }
+        .compare-table th:first-child { text-align: left; }
+        .compare-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-sub);
+        }
+        .compare-table td:first-child { font-weight: 500; color: var(--text-main); }
+        .compare-table tr:last-child td { border-bottom: none; }
+        .compare-table tr:hover td { background: #f8f9fa; }
+        .compare-table .us { color: #52C41A; font-weight: 700; text-align: center; }
+        .compare-table .them { color: #bbb; text-align: center; }
+        /* 显微镜图区 */
+        .tech-micro {
+            background: #fff;
+            border-radius: 10px;
+            padding: 28px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+        .tech-micro h3 { font-size: 18px; color: var(--primary-color); margin-bottom: 6px; font-weight: 700; }
+        .tech-micro p { font-size: 13px; color: var(--text-sub); margin-bottom: 16px; }
+        .micro-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+        .micro-grid img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .micro-grid img:hover { transform: scale(1.04); }
+
         /* 轮播器 */
         .carousel-wrap { position: relative; }
         .carousel-main {
@@ -460,14 +540,62 @@
 
             <section id="tech" class="page-section">
                 <h2 class="page-title">技术优势</h2>
-                <div class="data-cards">
-                    <div class="card">
-                        <div class="card-value">💎</div>
-                        <div>高密微米金刚石电镀</div>
+
+                <!-- 四宫格技术卡片 -->
+                <div class="tech-grid">
+                    <div class="tech-card">
+                        <div class="tech-card-icon">💎</div>
+                        <div class="tech-card-title">高密微米金刚石电镀</div>
+                        <div class="tech-card-desc">精选高等级金刚石颗粒，微型磨粒矩阵确保持久锋利，有效抑制玻璃陶瓷边缘的"崩瓷"现象，提升修复体的边缘精度与光洁度。</div>
                     </div>
-                    <div class="card">
-                        <div class="card-value">🛡️</div>
-                        <div>卓越耐磨性能</div>
+                    <div class="tech-card">
+                        <div class="tech-card-icon">🛡️</div>
+                        <div class="tech-card-title">卓越耐磨性能</div>
+                        <div class="tech-card-desc">全系列具备超高硬度，独家电镀固结技术使颗粒脱落率极低，带来更佳成本收益比，单颗毛坯提供数百件稳定切削。</div>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-card-icon">⚙️</div>
+                        <div class="tech-card-title">2025 最新技术标准</div>
+                        <div class="tech-card-desc">所有产品规格严格遵循 2025 年最新发布的数字化耗材技术图册，确保与全球主流切削设备完美匹配，无需额外调整参数。</div>
+                    </div>
+                    <div class="tech-card">
+                        <div class="tech-card-icon">📅</div>
+                        <div class="tech-card-title">8 年长效保障</div>
+                        <div class="tech-card-desc">产品有效期长达 8 年，体现对材料稳定性的极致信心，为技工所和门诊提供优异的经济效益与储备安全性。</div>
+                    </div>
+                </div>
+
+                <!-- 技术对比表 -->
+                <div class="tech-compare">
+                    <h3>📊 性能对比：星辰云创 vs 市场通货</h3>
+                    <table class="compare-table">
+                        <thead>
+                            <tr>
+                                <th>对比项目</th>
+                                <th>★ 星辰云创</th>
+                                <th>市场通货</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>金刚石涂层密度</td><td class="us">高密微米级</td><td class="them">普通级</td></tr>
+                            <tr><td>平均使用寿命</td><td class="us">200件+修复体</td><td class="them">80–120件</td></tr>
+                            <tr><td>崩瓷抑制效果</td><td class="us">显著优于同类</td><td class="them">一般</td></tr>
+                            <tr><td>产品有效期</td><td class="us">8 年</td><td class="them">2–3 年</td></tr>
+                            <tr><td>国际设备兼容性</td><td class="us">全主流品牌全视角</td><td class="them">部分兼容</td></tr>
+                            <tr><td>技术标准</td><td class="us">2025 最新图册</td><td class="them">旧版标准</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 3000x 显微镜图 -->
+                <div class="tech-micro">
+                    <h3>🔬 核心技术微观图（×3000 镜头电子显微镜）</h3>
+                    <p>金刚石磨粒铺陈分布极致均匀，微型磨粒矩阵客观展示切削层层面的崭新面貌，从微观角度验证崩瓷抑制能力。</p>
+                    <div class="micro-grid">
+                        <img src="imgs/微信图片_20260220183438_138_3278.jpg" alt="显微镜-磨粒分布" onclick="openLightbox(this.src)">
+                        <img src="imgs/微信图片_20260220183451_139_3278.jpg" alt="显微镜-磨粒排列" onclick="openLightbox(this.src)">
+                        <img src="imgs/微信图片_20260220183502_140_3278.jpg" alt="显微镜-高倍率" onclick="openLightbox(this.src)">
+                        <img src="imgs/微信图片_20260220183515_141_3278.jpg" alt="显微镜-金刚石晶体" onclick="openLightbox(this.src)">
                     </div>
                 </div>
             </section>
