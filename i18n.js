@@ -34,6 +34,8 @@ window.i18n = {
         /* ── 公司简介 ────────────────────────────────── */
         'banner-slogan':         '数字化口腔精密工具专家',
         'banner-sub':            '星辰云创 · 助力技工所降低单颗修复成本',
+        'card-val-quality':      '8年+',
+        'card-val-export':       '全球',
         'card-quality':          '品质保障',
         'card-customers':        '合作客户',
         'card-export':           '出口业务',
@@ -176,6 +178,8 @@ window.i18n = {
         /* ── About ───────────────────────────────────── */
         'banner-slogan':         'Expert in Digital Dental Precision Tools',
         'banner-sub':            'StellarCloud · Helping Labs Reduce Per-Unit Restoration Costs',
+        'card-val-quality':      '8+ Yrs',
+        'card-val-export':       'Global',
         'card-quality':          'Quality Guarantee',
         'card-customers':        'Partner Clients',
         'card-export':           'Global Export',

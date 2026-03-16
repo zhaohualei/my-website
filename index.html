@@ -782,7 +782,7 @@
                 <h2 class="page-title" data-i18n="title-about">公司简介</h2>
                 <div class="data-cards">
                     <div class="card">
-                        <div class="card-value">8年+</div>
+                        <div class="card-value" data-i18n="card-val-quality">8年+</div>
                         <div data-i18n="card-quality">品质保障</div>
                     </div>
                     <div class="card">
@@ -790,7 +790,7 @@
                         <div data-i18n="card-customers">合作客户</div>
                     </div>
                     <div class="card">
-                        <div class="card-value">全球</div>
+                        <div class="card-value" data-i18n="card-val-export">全球</div>
                         <div data-i18n="card-export">出口业务</div>
                     </div>
                 </div>
@@ -822,7 +822,7 @@
             <!-- 氧化锆铣刀系列 -->
             <section id="prod-zirconia" class="page-section">
                 <h2 class="page-title" data-i18n="title-zirconia">氧化锆铣刀系列</h2>
-                <p style="color:var(--text-sub);margin-bottom:20px;">钨钢材质 · 专用涂层 · 适配西诺德、ARUM、翔通等主流设备</p>
+                <p style="color:var(--text-sub);margin-bottom:20px;" data-i18n="zirconia-sub">钨钢材质 · 专用涂层 · 适配西诺德、ARUM、翔通等主流设备</p>
                 <div class="carousel-wrap">
                     <div class="carousel-main" onclick="openLightbox(carousels.zirconia.items[carousels.zirconia.idx].src)">
                         <img id="zirconia-img" src="" alt="">
@@ -947,7 +947,7 @@
                     </select>
                     <label data-i18n="compat-model-lbl">设备型号</label>
                     <select id="compat-model">
-                        <option value="">请先选择品牌</option>
+                        <option value="" data-i18n="compat-opt-model-wait">请先选择品牌</option>
                     </select>
                     <button class="btn-query" onclick="runCompatQuery()" data-i18n="btn-query">🔍 查询</button>
                     <button class="btn-reset" onclick="resetCompatQuery()" data-i18n="btn-reset">重置</button>
@@ -1489,6 +1489,12 @@
             }
             // 6. 下载按钮文字
             document.querySelectorAll('a.btn-download').forEach(el => { el.textContent = t('dl-btn'); });
+            // 7. 型号选择框（未选品牌时刷新提示文字）
+            const brandSel = document.getElementById('compat-brand');
+            const modelSel = document.getElementById('compat-model');
+            if (brandSel && modelSel && !brandSel.value) {
+                modelSel.innerHTML = `<option value="">${t('compat-opt-model-wait')}</option>`;
+            }
         }
 
         function switchLang() {
