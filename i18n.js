@@ -101,6 +101,14 @@ window.i18n = {
         'compat-no-data':        '暂无该型号的兼容数据，请联系我们获取支持',
         'compat-result-fmt':     '📋 {brand} · {model} — 可用产品（{count} 款）',
         'brand-wall-title':      '🏭 覆盖主流设备品牌（点击快速查询）',
+        'brand-sirona':          '西诺德 Sirona',
+        'brand-roland':          '罗兰 Roland',
+        'brand-amann':           '吉尔巴赫',
+        'brand-planmeca':        '普兰梅卡',
+        'brand-vhf':             'VHF',
+        'brand-arum':            'ARUM',
+        'brand-wieland':         '威兰德 Wieland',
+        'brand-dentium':         '登腾 Dentium',
 
         /* ── 下载中心 ────────────────────────────────── */
         'dl-title1':             '产品目录',
@@ -245,6 +253,14 @@ window.i18n = {
         'compat-no-data':        'No compatibility data for this model. Please contact us for support.',
         'compat-result-fmt':     '📋 {brand} · {model} — Compatible Products ({count} items)',
         'brand-wall-title':      '🏭 Compatible with Major Device Brands (click to query)',
+        'brand-sirona':          'Sirona',
+        'brand-roland':          'Roland',
+        'brand-amann':           'Amann Girrbach',
+        'brand-planmeca':        'Planmeca',
+        'brand-vhf':             'VHF',
+        'brand-arum':            'ARUM',
+        'brand-wieland':         'Wieland',
+        'brand-dentium':         'Dentium',
 
         /* ── Downloads ───────────────────────────────── */
         'dl-title1':             'Product Catalog',
