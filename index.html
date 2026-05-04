@@ -767,6 +767,55 @@
             line-height: 1;
             user-select: none;
         }
+
+        /* === 产品网格 === */
+        .prod-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 28px 16px;
+            margin-top: 8px;
+        }
+        .prod-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            gap: 12px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        .prod-circle {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle at 38% 32%, #edf1f5 0%, #c5cdd6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .prod-item:hover .prod-circle {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        .prod-circle img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+        .prod-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #222;
+            text-align: center;
+            line-height: 1.4;
+        }
+        @media (max-width: 960px) {
+            .prod-grid { grid-template-columns: repeat(3, 1fr); }
+        }
     </style>
 </head>
 <body>
@@ -828,10 +877,6 @@
                 <h2 class="page-title" data-i18n="title-about">公司简介</h2>
                 <div class="data-cards">
                     <div class="card">
-                        <div class="card-value" data-i18n="card-val-quality">8年+</div>
-                        <div data-i18n="card-quality">品质保障</div>
-                    </div>
-                    <div class="card">
                         <div class="card-value">1000+</div>
                         <div data-i18n="card-customers">合作客户</div>
                     </div>
@@ -839,83 +884,54 @@
                         <div class="card-value" data-i18n="card-val-export">专业</div>
                         <div data-i18n="card-export">售后保障</div>
                     </div>
+                    <div class="card">
+                        <div class="card-value" data-i18n="card-val-global">全球</div>
+                        <div data-i18n="card-global">出口业务</div>
+                    </div>
                 </div>
-                <p style="line-height: 1.8; margin-top: 20px; color: var(--text-sub);">
-                    <strong data-i18n="about-pos-label">企业定位：</strong><span data-i18n="about-pos-val">数字化口腔精密工具供应商</span><br>
-                    <strong data-i18n="about-biz-label">核心业务：</strong><span data-i18n="about-biz-val">玻璃陶瓷车针、氧化锆车针、树脂车针、金属车针等齿科切削工具的研发、生产、销售</span><br>
-                    <strong data-i18n="about-svc-label">服务理念：</strong><span data-i18n="about-svc-val">1.以专业方案、优质服务帮助客户解决降本增效痛点。 2.赋能经销商，供给好产品，全程无忧销售，安心拓市盈利。 3.为技工所和门诊提供精准专业指导，打通流程卡点，保障高效顺畅作业。</span>
-                </p>
+                <div style="line-height: 1.8; margin-top: 20px; color: var(--text-sub); display: flex; flex-direction: column; gap: 2px;">
+                    <div style="display: flex;">
+                        <strong style="flex-shrink: 0; white-space: nowrap;" data-i18n="about-pos-label">企业定位：</strong><span data-i18n="about-pos-val">数字化口腔精密工具供应商</span>
+                    </div>
+                    <div style="display: flex;">
+                        <strong style="flex-shrink: 0; white-space: nowrap;" data-i18n="about-biz-label">核心业务：</strong><span data-i18n="about-biz-val">玻璃陶瓷车针、氧化锆车针、树脂车针、金属车针等齿科切削工具的研发、生产、销售</span>
+                    </div>
+                    <div style="display: flex;">
+                        <strong style="flex-shrink: 0; white-space: nowrap;" data-i18n="about-svc-label">服务理念：</strong>
+                        <div style="display: flex; flex-direction: column;">
+                            <span data-i18n="about-svc-val1">1. 以专业方案、优质服务帮助客户解决降本增效痛点。</span>
+                            <span data-i18n="about-svc-val2">2. 赋能经销商，供给好产品，全程无忧销售，安心拓市盈利。</span>
+                            <span data-i18n="about-svc-val3">3. 为技工所和门诊提供精准专业指导，打通流程卡点，保障高效顺畅作业。</span>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- 玻璃陶瓷车针系列 -->
             <section id="prod-glass" class="page-section">
                 <h2 class="page-title" data-i18n="title-glass">玻璃陶瓷车针系列</h2>
                 <p style="color:var(--text-sub);margin-bottom:20px;" data-i18n="glass-sub">金刚石涂层 · 适配西诺德、罗兰、吉尔巴赫、登腾、威兰德、VHF、ARUM、IMES350、IMES250等</p>
-                <div class="carousel-wrap">
-                    <div class="carousel-main" onclick="openLightbox(carousels.glass.items[carousels.glass.idx].src)">
-                        <img id="glass-img" src="" alt="">
-                    </div>
-                    <button class="carousel-btn prev" onclick="carouselMove('glass',-1)">❮</button>
-                    <button class="carousel-btn next" onclick="carouselMove('glass',1)">❯</button>
-                    <div class="carousel-info">
-                        <span class="carousel-label-text" id="glass-label"></span>
-                        <span class="carousel-counter" id="glass-counter"></span>
-                    </div>
-                </div>
-                <div class="carousel-thumbs" id="glass-thumbs"></div>
+                <div class="prod-grid" id="glass-grid"></div>
             </section>
 
             <!-- 氧化锆车针系列 -->
             <section id="prod-zirconia" class="page-section">
                 <h2 class="page-title" data-i18n="title-zirconia">氧化锆车针系列</h2>
                 <p style="color:var(--text-sub);margin-bottom:20px;" data-i18n="zirconia-sub">专用涂层 · 适配西诺德、罗兰、翔通、云甲、ARUM、VHF、吉尔巴赫等</p>
-                <div class="carousel-wrap">
-                    <div class="carousel-main" onclick="openLightbox(carousels.zirconia.items[carousels.zirconia.idx].src)">
-                        <img id="zirconia-img" src="" alt="">
-                    </div>
-                    <button class="carousel-btn prev" onclick="carouselMove('zirconia',-1)">❮</button>
-                    <button class="carousel-btn next" onclick="carouselMove('zirconia',1)">❯</button>
-                    <div class="carousel-info">
-                        <span class="carousel-label-text" id="zirconia-label"></span>
-                        <span class="carousel-counter" id="zirconia-counter"></span>
-                    </div>
-                </div>
-                <div class="carousel-thumbs" id="zirconia-thumbs"></div>
+                <div class="prod-grid" id="zirconia-grid"></div>
             </section>
 
             <!-- 树脂车针系列 -->
             <section id="prod-pmma" class="page-section">
                 <h2 class="page-title" data-i18n="title-pmma">树脂车针系列</h2>
                 <p style="color:var(--text-sub);margin-bottom:20px;" data-i18n="pmma-sub">专用涂层适配罗兰、翔通、义获嘉等主流设备</p>
-                <div class="carousel-wrap">
-                    <div class="carousel-main" onclick="openLightbox(carousels.pmma.items[carousels.pmma.idx].src)">
-                        <img id="pmma-img" src="" alt="">
-                    </div>
-                    <button class="carousel-btn prev" onclick="carouselMove('pmma',-1)">❮</button>
-                    <button class="carousel-btn next" onclick="carouselMove('pmma',1)">❯</button>
-                    <div class="carousel-info">
-                        <span class="carousel-label-text" id="pmma-label"></span>
-                        <span class="carousel-counter" id="pmma-counter"></span>
-                    </div>
-                </div>
-                <div class="carousel-thumbs" id="pmma-thumbs"></div>
+                <div class="prod-grid" id="pmma-grid"></div>
             </section>
 
             <!-- 金属车针系列 -->
             <section id="prod-accessories" class="page-section">
                 <h2 class="page-title" data-i18n="title-accessories">金属车针系列</h2>
-                <div class="carousel-wrap">
-                    <div class="carousel-main" onclick="openLightbox(carousels.accessories.items[carousels.accessories.idx].src)">
-                        <img id="accessories-img" src="" alt="">
-                    </div>
-                    <button class="carousel-btn prev" onclick="carouselMove('accessories',-1)">❮</button>
-                    <button class="carousel-btn next" onclick="carouselMove('accessories',1)">❯</button>
-                    <div class="carousel-info">
-                        <span class="carousel-label-text" id="accessories-label"></span>
-                        <span class="carousel-counter" id="accessories-counter"></span>
-                    </div>
-                </div>
-                <div class="carousel-thumbs" id="accessories-thumbs"></div>
+                <div class="prod-grid" id="accessories-grid"></div>
             </section>
 
             <!-- 灯箱 -->
@@ -936,8 +952,8 @@
                     </div>
                     <div class="tech-card">
                         <div class="tech-card-icon">🛡️</div>
-                        <div class="tech-card-title" data-i18n="tech-card2-title">卓越耐磨性能</div>
-                        <div class="tech-card-desc" data-i18n="tech-card2-desc">全系列具备高硬度，专属电镀固结技术使颗粒脱落率极低，带来较高成本收益比，单颗毛坯提供稳定切削。</div>
+                        <div class="tech-card-title" data-i18n="tech-card2-title">稳定耐磨性能</div>
+                        <div class="tech-card-desc" data-i18n="tech-card2-desc">全系列具备较高硬度，专属电镀固结技术使颗粒脱落率极低，带来较高成本收益比。</div>
                     </div>
                     <div class="tech-card">
                         <div class="tech-card-icon">⚙️</div>
@@ -1101,7 +1117,7 @@
                         <h3 data-i18n="contact-info-title">联系方式</h3>
                         <div class="c-item">
                             <strong data-i18n="contact-addr-label">📍 公司地址</strong>
-                            <span data-i18n="contact-addr-val">北京市门头沟区石龙工业区雅安路6号院1号楼C座3层306室</span>
+                            <span data-i18n="contact-addr-val">北京市门头沟区石龙工业区雅安路6号院</span>
                         </div>
                         <div class="c-item">
                             <strong data-i18n="contact-email-label">📧 邮箱</strong>
@@ -1172,67 +1188,121 @@
 
     <script src="i18n.js"></script>
     <script>
-        // === 轮播数据 ===
-        const carousels = {
-            glass: {
-                idx: 0,
-                items: [
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260225085717_220_3278.jpg', label: '西诺德 MCXL 系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260220181110_108_3278.jpg', label: '西诺德 MCXL 实物' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260220181128_109_3278.jpg', label: 'CEREC3 系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260225085802_233_3278.jpg', label: '普兰梅卡 色环识别系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260225085715_219_3278.jpg', label: 'VHF / 爱尔创 DGA' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260225085728_222_3278.jpg', label: '吉尔巴赫专用' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260225085729_223_3278.jpg', label: 'ARUM 系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260225085740_227_3278.jpg', label: 'ARUM 系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260225085727_221_3278.jpg', label: '登腾系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260225085732_226_3278.jpg', label: '登腾系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260225085647_215_3278.jpg', label: '威兰德系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260225085656_216_3278.jpg', label: '柯乐德系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260225085705_217_3278.jpg', label: '泽康系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260225085715_218_3278.jpg', label: '也兰系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260220182522_120_3278.jpg', label: '多品牌兼容系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260220182526_121_3278.jpg', label: '多品牌兼容系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260220182535_122_3278.jpg', label: '多品牌兼容系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260220182608_123_3278.jpg', label: '多系统色环识别系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260220182632_125_3278.jpg', label: '多品牌兼容系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260220182808_127_3278.jpg', label: '多品牌兼容系列' },
-                    { src: 'imgs/玻璃陶瓷车针系列/微信图片_20260220182814_128_3278.jpg', label: '多品牌兼容系列' },
-                ]
-            },
-            zirconia: {
-                idx: 0,
-                items: [
-                    { src: 'imgs/氧化锆铣刀系列/微信图片_20260220181202_111_3278.jpg', label: '彩色涂层车针组' },
-                    { src: 'imgs/氧化锆铣刀系列/微信图片_20260220181244_112_3278.jpg', label: '多规格车针展示' },
-                    { src: 'imgs/氧化锆铣刀系列/微信图片_20260220181044_104_3278.jpg', label: '产品规格阵列图' },
-                    { src: 'imgs/氧化锆铣刀系列/微信图片_20260220181054_107_3278.jpg', label: '产品包装展示' },
-                    { src: 'imgs/氧化锆铣刀系列/微信图片_20260220181145_110_3278.jpg', label: '现货库存储备' },
-                ]
-            },
-            pmma: {
-                idx: 0,
-                items: [
-                    { src: '外贸产品图片/外贸产品图片/03树脂车针/01 Roland.png', label: 'Roland' },
-                    { src: '外贸产品图片/外贸产品图片/03树脂车针/02 VHF.png', label: 'VHF' },
-                ]
-            },
-            accessories: {
-                idx: 0,
-                items: [
-                    { src: '外贸产品图片/外贸产品图片/04金属车针/001 VHF.png', label: 'VHF' },
-                    { src: '外贸产品图片/外贸产品图片/04金属车针/002 Elosdent.png', label: 'Elosdent' },
-                    { src: '外贸产品图片/外贸产品图片/04金属车针/003 Roland.png', label: 'Roland' },
-                    { src: '外贸产品图片/外贸产品图片/04金属车针/004 Cradle.png', label: 'Cradle' },
-                    { src: '外贸产品图片/外贸产品图片/04金属车针/005 Amann Girrbach.png', label: 'Amann Girrbach' },
-                    { src: '外贸产品图片/外贸产品图片/04金属车针/006 Delma.png', label: 'Delma' },
-                    { src: '外贸产品图片/外贸产品图片/04金属车针/007 XTCERA (4mm Shank).png', label: 'XTCERA (4mm Shank)' },
-                    { src: '外贸产品图片/外贸产品图片/04金属车针/008 Ideal.png', label: 'Ideal' },
-                    { src: '外贸产品图片/外贸产品图片/04金属车针/009 Shendiao.png', label: 'Shendiao' },
-                    { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T1.png', label: 'Imes-icore 350i T1' },
-                ]
-            }
+        // === 产品数据 ===
+        const prodData = {
+            glass: [
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/01 Sirona CEREC MC XL.png',   name: 'Sirona CEREC MC XL' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/02 Sirona inLab MC X5.png',   name: 'Sirona inLab MC X5' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/03 Sirona CEREC 3.png',        name: 'Sirona CEREC 3' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/04 Sirona CEREC 3.png',        name: 'Sirona CEREC 3 (2)' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/05 ARUM(6mm Shank).png',      name: 'ARUM (6mm Shank)' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/06 ARUM(4mm Shank).png',      name: 'ARUM (4mm Shank)' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/07 Cradle (6mm Shank).png',   name: 'Cradle (6mm Shank)' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/08 Cradle (3mm Shank).png',   name: 'Cradle (3mm Shank)' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/09 Elosdent.png',              name: 'Elosdent' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/10 Imes-icore 350i.png',      name: 'Imes-icore 350i' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/11 Imes-icore 250i.png',      name: 'Imes-icore 250i' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/12 Dentium (6mm Shank).png',  name: 'Dentium (6mm Shank)' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/13 Dentium (3mm Shank).png',  name: 'Dentium (3mm Shank)' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/14 Lodden.png',                name: 'Lodden' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/15 Amann Girrbach.png',        name: 'Amann Girrbach' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/16 AIM.png',                   name: 'AIM' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/17 Ideal.png',                 name: 'Ideal' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/18 Roland.png',                name: 'Roland' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/19 Planmeca.png',              name: 'Planmeca' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/20 Wescan.png',                name: 'Wescan' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/21 VHF.png',                   name: 'VHF' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/22 Yelan.png',                 name: 'Yelan' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/23 Yuanbei.png',               name: 'Yuanbei' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/24 Yunjia.png',                name: 'Yunjia' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/25 Zotion.png',                name: 'Zotion' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/26 XTCERA (4mm Shank).png',   name: 'XTCERA (4mm Shank)' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/27 XTCERA (3mm Shank).png',   name: 'XTCERA (3mm Shank)' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/28 BESMED.png',                name: 'BESMED' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/29 Shendiao.png',              name: 'Shendiao' },
+                { src: '外贸产品图片/外贸产品图片/01玻璃陶瓷车针/30 Shinva.png',                name: 'Shinva' },
+            ],
+            zirconia: [
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/00 Sirona CEREC MC XL.png',     name: 'Sirona CEREC MC XL' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/01 Roland.png',                  name: 'Roland' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/02 ARUM.png',                    name: 'ARUM' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/03 Imes-icore 250i.png',         name: 'Imes-icore 250i' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/04 VHF.png',                     name: 'VHF' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/05 Amann Girrbach.png',           name: 'Amann Girrbach' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/06 Sirona inLab MC X5.png',      name: 'Sirona inLab MC X5' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/07 Cradle.png',                  name: 'Cradle' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/08 Lava.png',                    name: 'Lava' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/09 Wieland.png',                 name: 'Wieland' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/10 Upcera.png',                  name: 'Upcera' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/11  Ideal.png',                  name: 'Ideal' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/12 XTCERA (4mm Shank).png',     name: 'XTCERA (4mm Shank)' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/13 Shinva(4mm Shank).png',      name: 'Shinva (4mm Shank)' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/14 Shinva(3mm Shank).png',      name: 'Shinva (3mm Shank)' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/15 Aidite AMD.png',              name: 'Aidite AMD' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/16 Shendiao(3.175mm Shank).png', name: 'Shendiao (3.175mm Shank)' },
+                { src: '外贸产品图片/外贸产品图片/02氧化锆车针/17 Yunjia.png',                  name: 'Yunjia' },
+            ],
+            pmma: [
+                { src: '外贸产品图片/外贸产品图片/03树脂车针/01 Roland.png', name: 'Roland' },
+                { src: '外贸产品图片/外贸产品图片/03树脂车针/02 VHF.png',    name: 'VHF' },
+            ],
+            accessories: [
+                { src: '外贸产品图片/外贸产品图片/04金属车针/001 VHF.png',                    name: 'VHF' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/002 Elosdent.png',               name: 'Elosdent' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/003 Roland.png',                 name: 'Roland' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/004 Cradle.png',                 name: 'Cradle' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/005 Amann Girrbach.png',         name: 'Amann Girrbach' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/006 Delma.png',                  name: 'Delma' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/007 XTCERA (4mm Shank).png',    name: 'XTCERA (4mm Shank)' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/008 Ideal.png',                  name: 'Ideal' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/009 Shendiao.png',               name: 'Shendiao' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T1.png',         name: 'Imes-icore 350i T1' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T2.png',         name: 'Imes-icore 350i T2' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T3.png',         name: 'Imes-icore 350i T3' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T4.png',         name: 'Imes-icore 350i T4' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T5.png',         name: 'Imes-icore 350i T5' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T6.png',         name: 'Imes-icore 350i T6' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T7.png',         name: 'Imes-icore 350i T7' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T8.png',         name: 'Imes-icore 350i T8' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T9.png',         name: 'Imes-icore 350i T9' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T10.png',        name: 'Imes-icore 350i T10' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T11.png',        name: 'Imes-icore 350i T11' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T12.png',        name: 'Imes-icore 350i T12' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T16.png',        name: 'Imes-icore 350i T16' },
+                { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T17.png',        name: 'Imes-icore 350i T17' },
+            ]
         };
+
+        function initProdGrids() {
+            for (const id in prodData) {
+                const el = document.getElementById(id + '-grid');
+                if (!el) continue;
+                el.innerHTML = '';
+                prodData[id].forEach(item => {
+                    const a = document.createElement('a');
+                    a.className = 'prod-item';
+                    a.href = '#';
+                    a.title = item.name;
+                    a.addEventListener('click', (e) => { e.preventDefault(); openLightbox(item.src); });
+                    const circle = document.createElement('div');
+                    circle.className = 'prod-circle';
+                    const img = document.createElement('img');
+                    img.src = assetUrl(item.src);
+                    img.alt = item.name;
+                    img.loading = 'lazy';
+                    circle.appendChild(img);
+                    const nameDiv = document.createElement('div');
+                    nameDiv.className = 'prod-name';
+                    nameDiv.textContent = item.name;
+                    a.appendChild(circle);
+                    a.appendChild(nameDiv);
+                    el.appendChild(a);
+                });
+            }
+        }
+
+        // === 轮播数据（保留供其他功能使用）===
+        const carousels = {};
 
         function assetUrl(src) {
             if (/^(https?:|file:|data:|blob:)/i.test(src)) return src;
@@ -1326,7 +1396,7 @@
             }
         });
 
-        document.addEventListener('DOMContentLoaded', () => { initCarousels(); applyLang(); });
+        document.addEventListener('DOMContentLoaded', () => { initCarousels(); initProdGrids(); applyLang(); });
 
         function showDownloadTip(e) {
             e.preventDefault();
