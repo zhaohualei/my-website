@@ -817,6 +817,66 @@
         @media (max-width: 960px) {
             .prod-grid { grid-template-columns: repeat(3, 1fr); }
         }
+
+        /* === 产品详情弹层 === */
+        .prod-detail-modal {
+            display: none; position: fixed; inset: 0; z-index: 600;
+        }
+        .prod-detail-modal.open { display: flex; align-items: center; justify-content: center; }
+        .prod-detail-overlay {
+            position: absolute; inset: 0; background: rgba(0,0,0,0.55);
+        }
+        .prod-detail-panel {
+            position: relative; background: #fff; border-radius: 12px;
+            width: 820px; max-width: 96vw; max-height: 92vh;
+            overflow-y: auto; z-index: 1;
+            box-shadow: 0 24px 64px rgba(0,0,0,0.28);
+        }
+        .prod-detail-close {
+            position: absolute; top: 14px; right: 18px;
+            background: none; border: none; font-size: 28px; line-height: 1;
+            cursor: pointer; color: var(--text-sub); z-index: 2;
+        }
+        .prod-detail-close:hover { color: var(--primary-color); }
+        .prod-detail-content { display: grid; grid-template-columns: 1fr 1fr; }
+        .prod-detail-img-wrap {
+            background: radial-gradient(circle at 50% 50%, #f0f7ff 0%, #c8ddf0 100%);
+            padding: 36px; display: flex; align-items: center; justify-content: center;
+            min-height: 340px; border-radius: 12px 0 0 12px;
+        }
+        .prod-detail-img-wrap img { max-width: 100%; max-height: 280px; object-fit: contain; }
+        .prod-detail-info { padding: 32px 36px; }
+        .prod-detail-info h2 { font-size: 20px; color: var(--primary-color); margin-bottom: 8px; line-height: 1.4; }
+        .pd-badge {
+            display: inline-block; padding: 3px 12px; border-radius: 20px;
+            font-size: 12px; font-weight: 700; margin-bottom: 18px;
+        }
+        .pd-badge.glass    { background: #e8f4fd; color: #0a5c9e; }
+        .pd-badge.zirconia { background: #fff8e6; color: #b07000; }
+        .pd-badge.pmma     { background: #f0fff4; color: #1a7a3c; }
+        .pd-badge.metal    { background: #f5f5f5; color: #444; }
+        .pd-spec-table { width: 100%; font-size: 13px; border-collapse: collapse; margin-bottom: 20px; }
+        .pd-spec-table tr { border-bottom: 1px solid var(--border-color); }
+        .pd-spec-table tr:last-child { border-bottom: none; }
+        .pd-spec-table td { padding: 9px 4px; vertical-align: top; }
+        .pd-spec-table td:first-child { color: var(--text-sub); width: 42%; }
+        .pd-spec-table td:last-child  { font-weight: 600; color: var(--text-main); }
+        .pd-moq {
+            background: #fffbe6; border: 1px solid #ffe58f;
+            border-radius: 6px; padding: 8px 14px; font-size: 13px;
+            color: #7d5400; margin-bottom: 16px; display: flex; gap: 8px; align-items: center;
+        }
+        .pd-inquiry-btn {
+            display: block; width: 100%; padding: 13px;
+            background: var(--accent-color); color: #fff;
+            border: none; border-radius: 6px; font-size: 15px; font-weight: 700;
+            cursor: pointer; transition: background 0.2s; letter-spacing: 0.5px;
+        }
+        .pd-inquiry-btn:hover { background: #b8952a; }
+        @media (max-width: 700px) {
+            .prod-detail-content { grid-template-columns: 1fr; }
+            .prod-detail-img-wrap { border-radius: 12px 12px 0 0; min-height: 200px; }
+        }
     </style>
 </head>
 <body>
@@ -939,6 +999,26 @@
             <div class="lightbox" id="lightbox" onclick="closeLightbox()">
                 <span class="lightbox-close">&times;</span>
                 <img id="lightbox-img" src="" alt="产品大图">
+            </div>
+
+            <!-- 产品详情弹层 -->
+            <div class="prod-detail-modal" id="prod-detail-modal">
+                <div class="prod-detail-overlay" onclick="closeProdDetail()"></div>
+                <div class="prod-detail-panel">
+                    <button class="prod-detail-close" onclick="closeProdDetail()" aria-label="Close">&times;</button>
+                    <div class="prod-detail-content">
+                        <div class="prod-detail-img-wrap">
+                            <img id="pd-img" src="" alt="">
+                        </div>
+                        <div class="prod-detail-info">
+                            <h2 id="pd-name"></h2>
+                            <div id="pd-badge" class="pd-badge glass"></div>
+                            <table class="pd-spec-table"><tbody id="pd-specs"></tbody></table>
+                            <div class="pd-moq">📦 <span data-i18n="pd-moq-label">最小起订量</span>&nbsp;<strong>10 pcs</strong></div>
+                            <button class="pd-inquiry-btn" onclick="addToInquiry()" data-i18n="pd-inquiry-btn">立即询价 →</button>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <section id="tech" class="page-section">
@@ -1159,6 +1239,78 @@
                                 </div>
                             </div>
                             <div class="form-row">
+                                <div class="form-group">
+                                    <label data-i18n="f-country-label">国家/地区 *</label>
+                                    <select id="f-country">
+                                        <option value="" data-i18n="f-country-opt0">请选择</option>
+                                        <optgroup label="Asia / 亚洲">
+                                            <option>China (中国)</option>
+                                            <option>Japan (日本)</option>
+                                            <option>South Korea (韩国)</option>
+                                            <option>India (印度)</option>
+                                            <option>Thailand (泰国)</option>
+                                            <option>Vietnam (越南)</option>
+                                            <option>Malaysia (马来西亚)</option>
+                                            <option>Indonesia (印尼)</option>
+                                            <option>Philippines (菲律宾)</option>
+                                            <option>Australia (澳大利亚)</option>
+                                        </optgroup>
+                                        <optgroup label="Middle East / 中东">
+                                            <option>Saudi Arabia (沙特)</option>
+                                            <option>UAE (阿联酋)</option>
+                                            <option>Israel (以色列)</option>
+                                            <option>Turkey (土耳其)</option>
+                                            <option>Egypt (埃及)</option>
+                                        </optgroup>
+                                        <optgroup label="Europe / 欧洲">
+                                            <option>Germany (德国)</option>
+                                            <option>United Kingdom (英国)</option>
+                                            <option>France (法国)</option>
+                                            <option>Italy (意大利)</option>
+                                            <option>Spain (西班牙)</option>
+                                            <option>Netherlands (荷兰)</option>
+                                            <option>Poland (波兰)</option>
+                                            <option>Czech Republic (捷克)</option>
+                                        </optgroup>
+                                        <optgroup label="Americas / 美洲">
+                                            <option>United States (美国)</option>
+                                            <option>Canada (加拿大)</option>
+                                            <option>Brazil (巴西)</option>
+                                            <option>Mexico (墨西哥)</option>
+                                        </optgroup>
+                                        <optgroup label="Other / 其他">
+                                            <option>Other (其他)</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="f-whatsapp-label">WhatsApp / 微信</label>
+                                    <input type="text" id="f-whatsapp" data-i18n-ph="f-whatsapp-ph" placeholder="联系账号">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label data-i18n="f-qty-label">采购数量</label>
+                                    <select id="f-qty">
+                                        <option value="" data-i18n="f-qty-opt0">请选择</option>
+                                        <option value="trial"  data-i18n="f-qty-opt1">试单（1–10 件）</option>
+                                        <option value="small"  data-i18n="f-qty-opt2">小单（10–50 件）</option>
+                                        <option value="medium" data-i18n="f-qty-opt3">中单（50–200 件）</option>
+                                        <option value="large"  data-i18n="f-qty-opt4">大单（200+ 件）</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="f-currency-label">币种偏好</label>
+                                    <select id="f-currency">
+                                        <option value="USD">USD – 美元</option>
+                                        <option value="EUR">EUR – 欧元</option>
+                                        <option value="GBP">GBP – 英镑</option>
+                                        <option value="CNY">CNY – 人民币</option>
+                                        <option value="Other" data-i18n="f-currency-other">其他</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="form-group full">
                                     <label data-i18n="f-product-label">感兴趣的产品</label>
                                     <select id="f-product">
@@ -1284,7 +1436,7 @@
                     a.className = 'prod-item';
                     a.href = '#';
                     a.title = item.name;
-                    a.addEventListener('click', (e) => { e.preventDefault(); openLightbox(item.src); });
+                    a.addEventListener('click', (e) => { e.preventDefault(); openProdDetail(id, item); });
                     const circle = document.createElement('div');
                     circle.className = 'prod-circle';
                     const img = document.createElement('img');
@@ -1385,9 +1537,76 @@
             document.getElementById('lightbox').classList.remove('open');
         }
 
+        // === 产品详情弹层 ===
+        let _pdCategory = '';
+        let _pdItem = null;
+
+        function openProdDetail(category, item) {
+            _pdCategory = category;
+            _pdItem = item;
+            document.getElementById('pd-img').src = assetUrl(item.src);
+            document.getElementById('pd-img').alt = item.name;
+            document.getElementById('pd-name').textContent = item.name;
+            const catKey = { glass: 'pd-cat-glass', zirconia: 'pd-cat-zirconia', pmma: 'pd-cat-pmma', accessories: 'pd-cat-metal' };
+            const badge = document.getElementById('pd-badge');
+            badge.className = 'pd-badge ' + (category === 'accessories' ? 'metal' : category);
+            badge.textContent = t(catKey[category] || category);
+            document.getElementById('pd-specs').innerHTML = getProdSpecs(category, item.name)
+                .map(row => `<tr><td>${row[0]}</td><td>${row[1]}</td></tr>`).join('');
+            document.getElementById('prod-detail-modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProdDetail() {
+            document.getElementById('prod-detail-modal').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        function detectShank(name, category) {
+            if (/6\s*mm/i.test(name))      return '6 mm';
+            if (/4\s*mm/i.test(name))      return '4 mm';
+            if (/3\.175\s*mm/i.test(name)) return '3.175 mm';
+            if (/3\s*mm/i.test(name))      return '3 mm';
+            return { glass: '4 mm', zirconia: '4 mm', pmma: '3 mm', accessories: '4 mm' }[category] || '4 mm';
+        }
+
+        function getProdSpecs(category, name) {
+            const shank = detectShank(name, category);
+            const zh = {
+                glass:       [['材质','玻璃陶瓷专用'],  ['涂层','高密微米金刚石电镀'], ['柄径', shank], ['适用材料','玻璃陶瓷 / 二硅酸锂'], ['有效期','8 年']],
+                zirconia:    [['材质','氧化锆专用'],    ['涂层','专用耐磨涂层'],       ['柄径', shank], ['适用材料','氧化锆 / 全锆冠'],     ['有效期','8 年']],
+                pmma:        [['材质','树脂专用'],      ['涂层','专用涂层'],           ['柄径', shank], ['适用材料','PMMA / 树脂块'],       ['有效期','8 年']],
+                accessories: [['材质','金属专用'],      ['涂层','专用涂层'],           ['柄径', shank], ['适用材料','Co-Cr / 钛合金'],      ['有效期','8 年']],
+            };
+            const en = {
+                glass:       [['Material','Glass-Ceramic Grade'],  ['Coating','High-Density Micro Diamond'], ['Shank Dia.', shank], ['Application','Glass-Ceramic / Li. Disilicate'], ['Shelf Life','8 Years']],
+                zirconia:    [['Material','Zirconia Grade'],       ['Coating','Dedicated Wear-Resistant'],   ['Shank Dia.', shank], ['Application','Zirconia / Full-Contour Crown'],  ['Shelf Life','8 Years']],
+                pmma:        [['Material','Resin Grade'],          ['Coating','Dedicated Coating'],          ['Shank Dia.', shank], ['Application','PMMA / Resin Blanks'],           ['Shelf Life','8 Years']],
+                accessories: [['Material','Metal Grade'],          ['Coating','Dedicated Coating'],          ['Shank Dia.', shank], ['Application','Co-Cr / Titanium'],              ['Shelf Life','8 Years']],
+            };
+            return (currentLang === 'zh' ? zh : en)[category] || (currentLang === 'zh' ? zh : en)['glass'];
+        }
+
+        function addToInquiry() {
+            const catMap = { glass: 1, zirconia: 2, pmma: 3, accessories: 4 };
+            closeProdDetail();
+            const mi = document.querySelector('.menu-item[onclick*="contact"]');
+            if (mi) mi.click(); else switchPage('contact', null);
+            setTimeout(() => {
+                const sel = document.getElementById('f-product');
+                if (sel) sel.selectedIndex = catMap[_pdCategory] || 0;
+                const msg = document.getElementById('f-message');
+                if (msg && _pdItem) {
+                    const prefix = currentLang === 'zh' ? '感兴趣的产品：' : 'Interested in: ';
+                    msg.value = prefix + _pdItem.name + '\n';
+                }
+                document.querySelector('.contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 150);
+        }
+
         // === 键盘快捷键 ===
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') { closeLightbox(); return; }
+            if (e.key === 'Escape') { closeLightbox(); closeProdDetail(); return; }
             const activeSection = document.querySelector('.page-section.active');
             if (!activeSection) return;
             const id = activeSection.id.replace('prod-', '');
@@ -1408,16 +1627,25 @@
 
         function submitInquiry(e) {
             e.preventDefault();
-            const name = document.getElementById('f-name').value.trim();
-            const phone = document.getElementById('f-phone').value.trim();
+            const name     = document.getElementById('f-name').value.trim();
+            const phone    = document.getElementById('f-phone').value.trim();
             if (!name || !phone) return;
-            // 组装 mailto（纯前端无后端时的简易方案）
-            const company = document.getElementById('f-company').value;
-            const email = document.getElementById('f-email').value;
-            const product = document.getElementById('f-product').value;
-            const msg = document.getElementById('f-message').value;
-            const body = encodeURIComponent(`姓名: ${name}\n公司: ${company}\n电话: ${phone}\n邮箱: ${email}\n产品: ${product}\n留言: ${msg}`);
-            window.location.href = `mailto:stellarclouddental@163.com?subject=询价%20-%20${encodeURIComponent(name)}&body=${body}`;
+            const company  = document.getElementById('f-company').value;
+            const email    = document.getElementById('f-email').value;
+            const country  = document.getElementById('f-country')?.value  || '';
+            const whatsapp = document.getElementById('f-whatsapp')?.value || '';
+            const qty      = document.getElementById('f-qty')?.value      || '';
+            const currency = document.getElementById('f-currency')?.value || '';
+            const product  = document.getElementById('f-product').value;
+            const msg      = document.getElementById('f-message').value;
+            const isEn = currentLang === 'en';
+            const bodyText = isEn
+                ? `Name: ${name}\nCompany: ${company}\nPhone: ${phone}\nEmail: ${email}\nCountry: ${country}\nWhatsApp/WeChat: ${whatsapp}\nQuantity: ${qty}\nCurrency: ${currency}\nProduct: ${product}\nMessage: ${msg}`
+                : `姓名: ${name}\n公司: ${company}\n电话: ${phone}\n邮箱: ${email}\n国家/地区: ${country}\nWhatsApp/微信: ${whatsapp}\n采购数量: ${qty}\n币种: ${currency}\n产品: ${product}\n留言: ${msg}`;
+            const subject = isEn
+                ? `Inquiry – ${name}${country ? ' (' + country + ')' : ''}`
+                : `询价 – ${name}`;
+            window.location.href = `mailto:stellarclouddental@163.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
             document.getElementById('form-sent').style.display = 'block';
             e.target.reset();
         }

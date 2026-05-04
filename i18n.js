@@ -172,6 +172,28 @@ window.i18n = {
         'f-message-ph':          '请描述您的需求、所用设备品牌/型号、采购数量等...',
         'btn-submit':            '发送询价',
         'form-sent-msg':         '✅ 询价已提交！我们将在1个工作日内与您联系。',
+
+        /* ── 产品详情弹层 ────────────────────── */
+        'pd-cat-glass':          '玻璃陶瓷车针',
+        'pd-cat-zirconia':       '氧化锆车针',
+        'pd-cat-pmma':           '树脂车针',
+        'pd-cat-metal':          '金属车针',
+        'pd-moq-label':          '最小起订量',
+        'pd-inquiry-btn':        '立即询价 →',
+
+        /* ── 询盘表单（扩展字段）─────────────── */
+        'f-country-label':       '国家/地区 *',
+        'f-country-opt0':        '请选择',
+        'f-whatsapp-label':      'WhatsApp / 微信',
+        'f-whatsapp-ph':         '联系账号',
+        'f-qty-label':           '采购数量',
+        'f-qty-opt0':            '请选择',
+        'f-qty-opt1':            '试单（1–10 件）',
+        'f-qty-opt2':            '小单（10–50 件）',
+        'f-qty-opt3':            '中单（50–200 件）',
+        'f-qty-opt4':            '大单（200+ 件）',
+        'f-currency-label':      '币种偏好',
+        'f-currency-other':      '其他',
     },
 
     en: {
@@ -342,5 +364,25 @@ window.i18n = {
         'f-message-ph':          'Describe your needs, device brand/model, order quantity, etc.',
         'btn-submit':            'Send Inquiry',
         'form-sent-msg':         '✅ Inquiry submitted! We\'ll contact you within 1 business day.',
-    }
+        /* ── Product Detail Modal ──────────────────────── */
+        'pd-cat-glass':          'Glass-Ceramic Bur',
+        'pd-cat-zirconia':       'Zirconia Bur',
+        'pd-cat-pmma':           'Resin Bur',
+        'pd-cat-metal':          'Metal Bur',
+        'pd-moq-label':          'Min. Order',
+        'pd-inquiry-btn':        'Get a Quote \u2192',
+
+        /* ── Inquiry Form (Extended Fields) ───────────────── */
+        'f-country-label':       'Country / Region *',
+        'f-country-opt0':        'Select country',
+        'f-whatsapp-label':      'WhatsApp / WeChat',
+        'f-whatsapp-ph':         '+1 xxx xxxx',
+        'f-qty-label':           'Quantity Needed',
+        'f-qty-opt0':            'Select range',
+        'f-qty-opt1':            'Trial Order (1\u201310 pcs)',
+        'f-qty-opt2':            'Small Order (10\u201350 pcs)',
+        'f-qty-opt3':            'Medium Order (50\u2013200 pcs)',
+        'f-qty-opt4':            'Large Order (200+ pcs)',
+        'f-currency-label':      'Preferred Currency',
+        'f-currency-other':      'Other',    }
 };
