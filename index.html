@@ -1001,7 +1001,7 @@
                 <img id="lightbox-img" src="" alt="产品大图">
             </div>
 
-            <!-- 产品详情弹层 -->
+            <!-- 产品详情弹层（暂时禁用）
             <div class="prod-detail-modal" id="prod-detail-modal">
                 <div class="prod-detail-overlay" onclick="closeProdDetail()"></div>
                 <div class="prod-detail-panel">
@@ -1014,12 +1014,13 @@
                             <h2 id="pd-name"></h2>
                             <div id="pd-badge" class="pd-badge glass"></div>
                             <table class="pd-spec-table"><tbody id="pd-specs"></tbody></table>
-                            <div class="pd-moq">📦 <span data-i18n="pd-moq-label">最小起订量</span>&nbsp;<strong>10 pcs</strong></div>
+                            <div class="pd-moq">&#128230; <span data-i18n="pd-moq-label">最小起订量</span>&nbsp;<strong>10 pcs</strong></div>
                             <button class="pd-inquiry-btn" onclick="addToInquiry()" data-i18n="pd-inquiry-btn">立即询价 →</button>
                         </div>
                     </div>
                 </div>
             </div>
+            -->
 
             <section id="tech" class="page-section">
                 <h2 class="page-title" data-i18n="title-tech">技术优势</h2>
@@ -1221,7 +1222,9 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label data-i18n="f-name-label">姓名 *</label>
-                                    <input type="text" id="f-name" data-i18n-ph="f-name-ph" placeholder="您的姓名" required>
+                                    <input type="text" id="f-name" data-i18n-ph="f-name-ph" placeholder="您的姓名" required
+                                        oninvalid="this.setCustomValidity(currentLang==='en'?'Please fill in this field.':'请填写此字段。')"
+                                        oninput="this.setCustomValidity('')">
                                 </div>
                                 <div class="form-group">
                                     <label data-i18n="f-company-label">公司名称</label>
@@ -1231,7 +1234,9 @@
                             <div class="form-row">
                                 <div class="form-group">
                                     <label data-i18n="f-phone-label">联系电话 *</label>
-                                    <input type="tel" id="f-phone" data-i18n-ph="f-phone-ph" placeholder="手机或座机" required>
+                                    <input type="tel" id="f-phone" data-i18n-ph="f-phone-ph" placeholder="手机或座机" required
+                                        oninvalid="this.setCustomValidity(currentLang==='en'?'Please fill in this field.':'请填写此字段。')"
+                                        oninput="this.setCustomValidity('')">
                                 </div>
                                 <div class="form-group">
                                     <label data-i18n="f-email-label">电子邮箱</label>
@@ -1436,7 +1441,7 @@
                     a.className = 'prod-item';
                     a.href = '#';
                     a.title = item.name;
-                    a.addEventListener('click', (e) => { e.preventDefault(); openProdDetail(id, item); });
+                    a.addEventListener('click', (e) => { e.preventDefault(); openLightbox(item.src); });
                     const circle = document.createElement('div');
                     circle.className = 'prod-circle';
                     const img = document.createElement('img');
@@ -1537,7 +1542,7 @@
             document.getElementById('lightbox').classList.remove('open');
         }
 
-        // === 产品详情弹层 ===
+        /* === 产品详情弹层（暂时禁用）===
         let _pdCategory = '';
         let _pdItem = null;
 
@@ -1587,26 +1592,11 @@
             return (currentLang === 'zh' ? zh : en)[category] || (currentLang === 'zh' ? zh : en)['glass'];
         }
 
-        function addToInquiry() {
-            const catMap = { glass: 1, zirconia: 2, pmma: 3, accessories: 4 };
-            closeProdDetail();
-            const mi = document.querySelector('.menu-item[onclick*="contact"]');
-            if (mi) mi.click(); else switchPage('contact', null);
-            setTimeout(() => {
-                const sel = document.getElementById('f-product');
-                if (sel) sel.selectedIndex = catMap[_pdCategory] || 0;
-                const msg = document.getElementById('f-message');
-                if (msg && _pdItem) {
-                    const prefix = currentLang === 'zh' ? '感兴趣的产品：' : 'Interested in: ';
-                    msg.value = prefix + _pdItem.name + '\n';
-                }
-                document.querySelector('.contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 150);
-        }
+        禁用结束 */
 
         // === 键盘快捷键 ===
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') { closeLightbox(); closeProdDetail(); return; }
+            if (e.key === 'Escape') { closeLightbox(); return; }
             const activeSection = document.querySelector('.page-section.active');
             if (!activeSection) return;
             const id = activeSection.id.replace('prod-', '');
