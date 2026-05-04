@@ -1545,10 +1545,10 @@
             { label: '登腾 Dentium', en: 'Dentium', page: 'compatibility', cat: '品牌' },
             { label: 'VHF', en: 'VHF', page: 'compatibility', cat: '品牌' },
             { label: 'ARUM', en: 'ARUM', page: 'compatibility', cat: '品牌' },
-            ...carousels.glass.items.map(i => ({ label: i.label, en: i.label, page: 'prod-glass', cat: '玻璃陶瓷' })),
-            ...carousels.zirconia.items.map(i => ({ label: i.label, en: i.label, page: 'prod-zirconia', cat: '氧化锆' })),
-            ...carousels.pmma.items.map(i => ({ label: i.label, en: i.label, page: 'prod-pmma', cat: '树脂' })),
-            ...carousels.accessories.items.map(i => ({ label: i.label, en: i.label, page: 'prod-accessories', cat: '金属' })),
+            ...prodData.glass.map(i => ({ label: i.name, en: i.name, page: 'prod-glass', cat: '玻璃陶瓷' })),
+            ...prodData.zirconia.map(i => ({ label: i.name, en: i.name, page: 'prod-zirconia', cat: '氧化锆' })),
+            ...prodData.pmma.map(i => ({ label: i.name, en: i.name, page: 'prod-pmma', cat: '树脂' })),
+            ...prodData.accessories.map(i => ({ label: i.name, en: i.name, page: 'prod-accessories', cat: '金属' })),
         ];
 
         let searchOpen = false;
