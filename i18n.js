@@ -147,7 +147,7 @@ window.i18n = {
         /* ── 联系我们 ────────────────────────────────── */
         'contact-info-title':    '联系方式',
         'contact-addr-label':    '📍 公司地址',
-        'contact-addr-val':      '北京市门头沟区石龙工业区雅安路6号院1号楼C座3层306室',
+        'contact-addr-val':      '北京市门头沟区石龙工业区雅安路6号院',
         'contact-email-label':   '📧 邮箱',
         'contact-phone-label':   '📞 电话',
         'contact-hours-label':   '🕐 服务时间',
@@ -317,7 +317,7 @@ window.i18n = {
         /* ── Contact ─────────────────────────────────── */
         'contact-info-title':    'Contact Info',
         'contact-addr-label':    '📍 Address',
-        'contact-addr-val':      'Room 306, Floor 3, Bldg 1-C, No.6 Ya\'an Rd, Shilong Industrial Zone, Mentougou, Beijing',
+        'contact-addr-val':      'No.6 Ya\'an Rd, Shilong Industrial Zone, Mentougou, Beijing',
         'contact-email-label':   '📧 Email',
         'contact-phone-label':   '📞 Phone',
         'contact-hours-label':   '🕐 Business Hours',
