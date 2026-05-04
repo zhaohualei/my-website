@@ -431,6 +431,40 @@
             margin-bottom: 10px;
         }
         .tech-card-desc { font-size: 14px; color: var(--text-sub); line-height: 1.8; }
+        .tech-process-panel {
+            background: #fff;
+            border-radius: 10px;
+            padding: 28px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        }
+        .tech-process-panel h3 {
+            font-size: 18px;
+            color: var(--primary-color);
+            margin-bottom: 18px;
+            font-weight: 700;
+        }
+        .process-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px 20px;
+        }
+        .process-step {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 18px;
+        }
+        .process-step strong {
+            display: block;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 15px;
+        }
+        .process-step p {
+            color: var(--text-sub);
+            font-size: 14px;
+            line-height: 1.7;
+        }
         /* 技术对比表 */
         .tech-compare {
             background: #fff;
@@ -694,6 +728,18 @@
             opacity: 1;
             border-color: var(--accent-color);
         }
+
+        @media (max-width: 960px) {
+            .data-cards {
+                flex-direction: column;
+            }
+            .download-grid,
+            .tech-grid,
+            .process-list,
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
         /* 灯箱 */
         .lightbox {
             display: none;
@@ -736,7 +782,7 @@
                 <div class="search-dropdown" id="search-dropdown"></div>
             </div>
             <span class="lang-toggle" id="lang-toggle" onclick="switchLang()">🌐 EN</span>
-            <span>📞 086-010-60869401</span>
+            <span>📞 +86 13269226137</span>
         </div>
     </header>
 
@@ -750,9 +796,9 @@
                 <div class="menu-title" data-i18n="nav-products">产品中心 ▾</div>
                 <ul class="sub-menu">
                     <li onclick="switchPage('prod-glass', this, event)" data-i18n="nav-glass">玻璃陶瓷车针系列</li>
-                    <li onclick="switchPage('prod-zirconia', this, event)" data-i18n="nav-zirconia">氧化锆铣刀系列</li>
-                    <li onclick="switchPage('prod-pmma', this, event)" data-i18n="nav-pmma">PMMA/蜡块铣刀</li>
-                    <li onclick="switchPage('prod-accessories', this, event)" data-i18n="nav-accessories">配件与耗材</li>
+                    <li onclick="switchPage('prod-zirconia', this, event)" data-i18n="nav-zirconia">氧化锆车针系列</li>
+                    <li onclick="switchPage('prod-pmma', this, event)" data-i18n="nav-pmma">树脂车针系列</li>
+                    <li onclick="switchPage('prod-accessories', this, event)" data-i18n="nav-accessories">金属车针系列</li>
                 </ul>
             </div>
 
@@ -786,25 +832,25 @@
                         <div data-i18n="card-quality">品质保障</div>
                     </div>
                     <div class="card">
-                        <div class="card-value">100+</div>
+                        <div class="card-value">1000+</div>
                         <div data-i18n="card-customers">合作客户</div>
                     </div>
                     <div class="card">
-                        <div class="card-value" data-i18n="card-val-export">全球</div>
-                        <div data-i18n="card-export">出口业务</div>
+                        <div class="card-value" data-i18n="card-val-export">专业</div>
+                        <div data-i18n="card-export">售后保障</div>
                     </div>
                 </div>
                 <p style="line-height: 1.8; margin-top: 20px; color: var(--text-sub);">
                     <strong data-i18n="about-pos-label">企业定位：</strong><span data-i18n="about-pos-val">数字化口腔精密工具供应商</span><br>
-                    <strong data-i18n="about-biz-label">核心业务：</strong><span data-i18n="about-biz-val">切削耗材研发、生产、销售</span><br>
-                    <strong data-i18n="about-svc-label">服务理念：</strong><span data-i18n="about-svc-val">降低B端单颗修复成本，为技工所和门诊提供优异的经济效益与储备安全性。</span>
+                    <strong data-i18n="about-biz-label">核心业务：</strong><span data-i18n="about-biz-val">玻璃陶瓷车针、氧化锆车针、树脂车针、金属车针等齿科切削工具的研发、生产、销售</span><br>
+                    <strong data-i18n="about-svc-label">服务理念：</strong><span data-i18n="about-svc-val">1.以专业方案、优质服务帮助客户解决降本增效痛点。 2.赋能经销商，供给好产品，全程无忧销售，安心拓市盈利。 3.为技工所和门诊提供精准专业指导，打通流程卡点，保障高效顺畅作业。</span>
                 </p>
             </section>
 
             <!-- 玻璃陶瓷车针系列 -->
             <section id="prod-glass" class="page-section">
                 <h2 class="page-title" data-i18n="title-glass">玻璃陶瓷车针系列</h2>
-                <p style="color:var(--text-sub);margin-bottom:20px;" data-i18n="glass-sub">金刚石电镀工艺 · 适配西诺德、CEREC、普兰梅卡等主流设备</p>
+                <p style="color:var(--text-sub);margin-bottom:20px;" data-i18n="glass-sub">金刚石涂层 · 适配西诺德、罗兰、吉尔巴赫、登腾、威兰德、VHF、ARUM、IMES350、IMES250等</p>
                 <div class="carousel-wrap">
                     <div class="carousel-main" onclick="openLightbox(carousels.glass.items[carousels.glass.idx].src)">
                         <img id="glass-img" src="" alt="">
@@ -819,10 +865,10 @@
                 <div class="carousel-thumbs" id="glass-thumbs"></div>
             </section>
 
-            <!-- 氧化锆铣刀系列 -->
+            <!-- 氧化锆车针系列 -->
             <section id="prod-zirconia" class="page-section">
-                <h2 class="page-title" data-i18n="title-zirconia">氧化锆铣刀系列</h2>
-                <p style="color:var(--text-sub);margin-bottom:20px;" data-i18n="zirconia-sub">钨钢材质 · 专用涂层 · 适配西诺德、ARUM、翔通等主流设备</p>
+                <h2 class="page-title" data-i18n="title-zirconia">氧化锆车针系列</h2>
+                <p style="color:var(--text-sub);margin-bottom:20px;" data-i18n="zirconia-sub">专用涂层 · 适配西诺德、罗兰、翔通、云甲、ARUM、VHF、吉尔巴赫等</p>
                 <div class="carousel-wrap">
                     <div class="carousel-main" onclick="openLightbox(carousels.zirconia.items[carousels.zirconia.idx].src)">
                         <img id="zirconia-img" src="" alt="">
@@ -837,20 +883,39 @@
                 <div class="carousel-thumbs" id="zirconia-thumbs"></div>
             </section>
 
-            <!-- PMMA/蜡块铣刀 -->
+            <!-- 树脂车针系列 -->
             <section id="prod-pmma" class="page-section">
-                <h2 class="page-title" data-i18n="title-pmma">PMMA / 蜡块铣刀</h2>
-                <div style="margin-top:40px;border:2px dashed var(--border-color);padding:60px;text-align:center;background:#fff;border-radius:8px;color:var(--text-sub);">
-                    <span data-i18n="coming-soon">产品图片整理中，敬请期待</span>
+                <h2 class="page-title" data-i18n="title-pmma">树脂车针系列</h2>
+                <p style="color:var(--text-sub);margin-bottom:20px;" data-i18n="pmma-sub">专用涂层适配罗兰、翔通、义获嘉等主流设备</p>
+                <div class="carousel-wrap">
+                    <div class="carousel-main" onclick="openLightbox(carousels.pmma.items[carousels.pmma.idx].src)">
+                        <img id="pmma-img" src="" alt="">
+                    </div>
+                    <button class="carousel-btn prev" onclick="carouselMove('pmma',-1)">❮</button>
+                    <button class="carousel-btn next" onclick="carouselMove('pmma',1)">❯</button>
+                    <div class="carousel-info">
+                        <span class="carousel-label-text" id="pmma-label"></span>
+                        <span class="carousel-counter" id="pmma-counter"></span>
+                    </div>
                 </div>
+                <div class="carousel-thumbs" id="pmma-thumbs"></div>
             </section>
 
-            <!-- 配件与耗材 -->
+            <!-- 金属车针系列 -->
             <section id="prod-accessories" class="page-section">
-                <h2 class="page-title" data-i18n="title-accessories">配件与耗材</h2>
-                <div style="margin-top:40px;border:2px dashed var(--border-color);padding:60px;text-align:center;background:#fff;border-radius:8px;color:var(--text-sub);">
-                    <span data-i18n="coming-soon">产品图片整理中，敬请期待</span>
+                <h2 class="page-title" data-i18n="title-accessories">金属车针系列</h2>
+                <div class="carousel-wrap">
+                    <div class="carousel-main" onclick="openLightbox(carousels.accessories.items[carousels.accessories.idx].src)">
+                        <img id="accessories-img" src="" alt="">
+                    </div>
+                    <button class="carousel-btn prev" onclick="carouselMove('accessories',-1)">❮</button>
+                    <button class="carousel-btn next" onclick="carouselMove('accessories',1)">❯</button>
+                    <div class="carousel-info">
+                        <span class="carousel-label-text" id="accessories-label"></span>
+                        <span class="carousel-counter" id="accessories-counter"></span>
+                    </div>
                 </div>
+                <div class="carousel-thumbs" id="accessories-thumbs"></div>
             </section>
 
             <!-- 灯箱 -->
@@ -872,51 +937,47 @@
                     <div class="tech-card">
                         <div class="tech-card-icon">🛡️</div>
                         <div class="tech-card-title" data-i18n="tech-card2-title">卓越耐磨性能</div>
-                        <div class="tech-card-desc" data-i18n="tech-card2-desc">全系列具备超高硬度，独家电镀固结技术使颗粒脱落率极低，带来更佳成本收益比，单颗毛坯提供数百件稳定切削。</div>
+                        <div class="tech-card-desc" data-i18n="tech-card2-desc">全系列具备高硬度，专属电镀固结技术使颗粒脱落率极低，带来较高成本收益比，单颗毛坯提供稳定切削。</div>
                     </div>
                     <div class="tech-card">
                         <div class="tech-card-icon">⚙️</div>
-                        <div class="tech-card-title" data-i18n="tech-card3-title">2025 最新技术标准</div>
-                        <div class="tech-card-desc" data-i18n="tech-card3-desc">所有产品规格严格遵循 2025 年最新发布的数字化耗材技术图册，确保与全球主流切削设备完美匹配，无需额外调整参数。</div>
+                        <div class="tech-card-title" data-i18n="tech-card3-title">多维度精密检验流程</div>
+                        <div class="tech-card-desc" data-i18n="tech-card3-desc">执行严苛质检标准，全流程严控跳动与尺寸公差，并在50倍高清视野下精检刃口及砂面细节，以微米级精细把控，铸就可靠品质。</div>
                     </div>
                     <div class="tech-card">
                         <div class="tech-card-icon">📅</div>
-                        <div class="tech-card-title" data-i18n="tech-card4-title">8 年长效保障</div>
-                        <div class="tech-card-desc" data-i18n="tech-card4-desc">产品有效期长达 8 年，体现对材料稳定性的极致信心，为技工所和门诊提供优异的经济效益与储备安全性。</div>
+                        <div class="tech-card-title" data-i18n="tech-card4-title">系统化专业指导 / 落地式技术赋能</div>
+                        <div class="tech-card-desc" data-i18n="tech-card4-desc">依托对各类切削设备的深度精通，以及对车针产品特性与应用场景的全面熟悉，为客户提供系统化、全流程的技术指导。从设备匹配调试、车针选型应用，到实操规范与效率优化，以可落地、可执行、可见效的赋能方案，切实解决实际问题。</div>
                     </div>
                 </div>
 
-                <!-- 技术对比表 -->
-                <div class="tech-compare">
-                    <h3 data-i18n="compare-title">📊 性能对比：星辰云创 vs 市场通货</h3>
-                    <table class="compare-table">
-                        <thead>
-                            <tr>
-                                <th data-i18n="compare-th1">对比项目</th>
-                                <th data-i18n="compare-th2">★ 星辰云创</th>
-                                <th data-i18n="compare-th3">市场通货</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td data-i18n="compare-r1-item">金刚石涂层密度</td><td class="us" data-i18n="compare-r1-us">高密微米级</td><td class="them" data-i18n="compare-r1-them">普通级</td></tr>
-                            <tr><td data-i18n="compare-r2-item">平均使用寿命</td><td class="us" data-i18n="compare-r2-us">200件+修复体</td><td class="them" data-i18n="compare-r2-them">80–120件</td></tr>
-                            <tr><td data-i18n="compare-r3-item">崩瓷抑制效果</td><td class="us" data-i18n="compare-r3-us">显著优于同类</td><td class="them" data-i18n="compare-r3-them">一般</td></tr>
-                            <tr><td data-i18n="compare-r4-item">产品有效期</td><td class="us" data-i18n="compare-r4-us">8 年</td><td class="them" data-i18n="compare-r4-them">2–3 年</td></tr>
-                            <tr><td data-i18n="compare-r5-item">国际设备兼容性</td><td class="us" data-i18n="compare-r5-us">全主流品牌全视角</td><td class="them" data-i18n="compare-r5-them">部分兼容</td></tr>
-                            <tr><td data-i18n="compare-r6-item">技术标准</td><td class="us" data-i18n="compare-r6-us">2025 最新图册</td><td class="them" data-i18n="compare-r6-them">旧版标准</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- 3000x 显微镜图 -->
-                <div class="tech-micro">
-                    <h3 data-i18n="micro-title">🔬 核心技术微观图（×3000 镜头电子显微镜）</h3>
-                    <p data-i18n="micro-desc">金刚石磨粒铺陈分布极致均匀，微型磨粒矩阵客观展示切削层层面的崭新面貌，从微观角度验证崩瓷抑制能力。</p>
-                    <div class="micro-grid">
-                        <img src="imgs/微信图片_20260220183438_138_3278.jpg" alt="显微镜-磨粒分布" onclick="openLightbox(this.src)">
-                        <img src="imgs/微信图片_20260220183451_139_3278.jpg" alt="显微镜-磨粒排列" onclick="openLightbox(this.src)">
-                        <img src="imgs/微信图片_20260220183502_140_3278.jpg" alt="显微镜-高倍率" onclick="openLightbox(this.src)">
-                        <img src="imgs/微信图片_20260220183515_141_3278.jpg" alt="显微镜-金刚石晶体" onclick="openLightbox(this.src)">
+                <div class="tech-process-panel">
+                    <h3 data-i18n="process-title">车针精细化品质管控流程</h3>
+                    <div class="process-list">
+                        <div class="process-step">
+                            <strong data-i18n="process-step1-title">1.优质原材料甄选</strong>
+                            <p data-i18n="process-step1-desc">严格筛选符合行业标准的高品质基体材料，从源头把控产品基础品质，保障后续加工稳定性。</p>
+                        </div>
+                        <div class="process-step">
+                            <strong data-i18n="process-step2-title">2.精密机械加工</strong>
+                            <p data-i18n="process-step2-desc">通过高精度数控设备对原材料进行切削、打磨、成型加工，精准制成车针标准基体，确保尺寸精度达标。</p>
+                        </div>
+                        <div class="process-step">
+                            <strong data-i18n="process-step3-title">3.半成品专项检测</strong>
+                            <p data-i18n="process-step3-desc">对加工完成的车针基体，进行外观瑕疵检测、径向跳动精度检测，剔除不合格半成品，保障半成品质量。</p>
+                        </div>
+                        <div class="process-step">
+                            <strong data-i18n="process-step4-title">4.专业涂层处理</strong>
+                            <p data-i18n="process-step4-desc">采用先进涂层工艺，为合格半成品施加耐磨专用涂层，提升车针耐磨性与使用寿命。</p>
+                        </div>
+                        <div class="process-step">
+                            <strong data-i18n="process-step5-title">5.成品全项性能检测</strong>
+                            <p data-i18n="process-step5-desc">针对涂层后的成品，全面开展外观检测、径向跳动检测、尺寸精度检测、涂层附着力检测等多项性能测试。</p>
+                        </div>
+                        <div class="process-step">
+                            <strong data-i18n="process-step6-title">6.合格成品出厂</strong>
+                            <p data-i18n="process-step6-desc">所有检测项目均达标，即为性能稳定、品质合格的车针成品，可入库、出库投入使用。</p>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -981,7 +1042,7 @@
                         <div class="download-icon">📋</div>
                         <div class="download-info">
                             <div class="download-title" data-i18n="dl-title1">产品目录</div>
-                            <div class="download-desc" data-i18n="dl-desc1">全系列产品规格手册，包含玻璃陶瓷车针、氧化锆铣刀、PMMA铣刀等所有产品的详细参数与适配说明。</div>
+                            <div class="download-desc" data-i18n="dl-desc1">全系列产品规格手册，包含玻璃陶瓷车针、氧化锆车针、树脂车针、金属车针等所有产品的详细参数与适配说明。</div>
                             <div class="download-meta">
                                 <span class="file-badge">PDF</span>
                                 <a class="btn-download" href="#" onclick="showDownloadTip(event)">⬇ 下载</a>
@@ -1006,7 +1067,6 @@
                             <div class="download-desc" data-i18n="dl-desc3">汇总15+主流切削设备与我司产品的完整兼容对照，支持按品牌/型号快速筛选，适合技工所日常备料参考。</div>
                             <div class="download-meta">
                                 <span class="file-badge">PDF</span>
-                                <span class="file-badge">Excel</span>
                                 <a class="btn-download" href="#" onclick="showDownloadTip(event)">⬇ 下载</a>
                             </div>
                         </div>
@@ -1049,7 +1109,7 @@
                         </div>
                         <div class="c-item">
                             <strong data-i18n="contact-phone-label">📞 电话</strong>
-                            <span>086-010-60869401</span>
+                            <span>+86 13269226137</span>
                         </div>
                         <div class="c-item">
                             <strong data-i18n="contact-hours-label">🕐 服务时间</strong>
@@ -1087,9 +1147,9 @@
                                     <select id="f-product">
                                         <option value="" data-i18n="f-product-opt0">请选择</option>
                                         <option data-i18n="f-product-opt1">玻璃陶瓷车针系列</option>
-                                        <option data-i18n="f-product-opt2">氧化锆铣刀系列</option>
-                                        <option data-i18n="f-product-opt3">PMMA/蜡块铣刀</option>
-                                        <option data-i18n="f-product-opt4">配件与耗材</option>
+                                        <option data-i18n="f-product-opt2">氧化锆车针系列</option>
+                                        <option data-i18n="f-product-opt3">树脂车针系列</option>
+                                        <option data-i18n="f-product-opt4">金属车针系列</option>
                                         <option data-i18n="f-product-opt5">多品类采购</option>
                                     </select>
                                 </div>
@@ -1143,20 +1203,48 @@
             zirconia: {
                 idx: 0,
                 items: [
-                    { src: 'imgs/氧化锆铣刀系列/微信图片_20260220181202_111_3278.jpg', label: '彩色涂层铣刀组' },
-                    { src: 'imgs/氧化锆铣刀系列/微信图片_20260220181244_112_3278.jpg', label: '多规格铣刀展示' },
+                    { src: 'imgs/氧化锆铣刀系列/微信图片_20260220181202_111_3278.jpg', label: '彩色涂层车针组' },
+                    { src: 'imgs/氧化锆铣刀系列/微信图片_20260220181244_112_3278.jpg', label: '多规格车针展示' },
                     { src: 'imgs/氧化锆铣刀系列/微信图片_20260220181044_104_3278.jpg', label: '产品规格阵列图' },
                     { src: 'imgs/氧化锆铣刀系列/微信图片_20260220181054_107_3278.jpg', label: '产品包装展示' },
                     { src: 'imgs/氧化锆铣刀系列/微信图片_20260220181145_110_3278.jpg', label: '现货库存储备' },
                 ]
+            },
+            pmma: {
+                idx: 0,
+                items: [
+                    { src: '外贸产品图片/外贸产品图片/03树脂车针/01 Roland.png', label: 'Roland' },
+                    { src: '外贸产品图片/外贸产品图片/03树脂车针/02 VHF.png', label: 'VHF' },
+                ]
+            },
+            accessories: {
+                idx: 0,
+                items: [
+                    { src: '外贸产品图片/外贸产品图片/04金属车针/001 VHF.png', label: 'VHF' },
+                    { src: '外贸产品图片/外贸产品图片/04金属车针/002 Elosdent.png', label: 'Elosdent' },
+                    { src: '外贸产品图片/外贸产品图片/04金属车针/003 Roland.png', label: 'Roland' },
+                    { src: '外贸产品图片/外贸产品图片/04金属车针/004 Cradle.png', label: 'Cradle' },
+                    { src: '外贸产品图片/外贸产品图片/04金属车针/005 Amann Girrbach.png', label: 'Amann Girrbach' },
+                    { src: '外贸产品图片/外贸产品图片/04金属车针/006 Delma.png', label: 'Delma' },
+                    { src: '外贸产品图片/外贸产品图片/04金属车针/007 XTCERA (4mm Shank).png', label: 'XTCERA (4mm Shank)' },
+                    { src: '外贸产品图片/外贸产品图片/04金属车针/008 Ideal.png', label: 'Ideal' },
+                    { src: '外贸产品图片/外贸产品图片/04金属车针/009 Shendiao.png', label: 'Shendiao' },
+                    { src: '外贸产品图片/外贸产品图片/04金属车针/Imes-icore 350i T1.png', label: 'Imes-icore 350i T1' },
+                ]
             }
         };
+
+        function assetUrl(src) {
+            if (/^(https?:|file:|data:|blob:)/i.test(src)) return src;
+            return src.split('/').map(part => encodeURIComponent(part)).join('/');
+        }
 
         function carouselRender(id) {
             const c = carousels[id];
             if (!c) return;
             const item = c.items[c.idx];
-            document.getElementById(id + '-img').src = item.src;
+            document.getElementById(id + '-img').src = assetUrl(item.src);
+            document.getElementById(id + '-img').alt = item.label;
             document.getElementById(id + '-label').textContent = item.label;
             document.getElementById(id + '-counter').textContent = (c.idx + 1) + ' / ' + c.items.length;
             document.querySelectorAll('#' + id + '-thumbs .carousel-thumb').forEach((t, i) => {
@@ -1181,9 +1269,10 @@
             for (const id in carousels) {
                 const thumbsEl = document.getElementById(id + '-thumbs');
                 if (!thumbsEl) continue;
+                thumbsEl.innerHTML = '';
                 carousels[id].items.forEach((item, i) => {
                     const img = document.createElement('img');
-                    img.src = item.src;
+                    img.src = assetUrl(item.src);
                     img.className = 'carousel-thumb';
                     img.alt = item.label;
                     img.onclick = () => carouselGoto(id, i);
@@ -1199,21 +1288,26 @@
         }
 
         function switchPage(pageId, element, event) {
-            if (event) {
-                event.stopPropagation();
-                document.querySelectorAll('.sub-menu li').forEach(el => el.classList.remove('active'));
-                element.classList.add('active');
-            }
+            if (event) event.stopPropagation();
+            const target = element
+                || document.querySelector(`li[onclick*="'${pageId}'"]`)
+                || document.querySelector(`.menu-item[onclick*="'${pageId}'"]`);
+            document.querySelectorAll('.sub-menu li').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
-            const parentMenuItem = element.closest('.menu-item');
+            if (target?.matches('.sub-menu li')) {
+                target.classList.add('active');
+            }
+            const parentMenuItem = target?.closest('.menu-item');
             if (parentMenuItem) parentMenuItem.classList.add('active');
+            else if (target?.classList?.contains('menu-item')) target.classList.add('active');
             document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+            const nextSection = document.getElementById(pageId);
+            if (nextSection) nextSection.classList.add('active');
         }
 
         // === 灯箱 ===
         function openLightbox(src) {
-            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox-img').src = assetUrl(src);
             document.getElementById('lightbox').classList.add('open');
         }
         function closeLightbox() {
@@ -1365,9 +1459,9 @@
         const searchIndex = [
             { label: '公司简介', en: 'About Us', page: 'about', cat: '页面' },
             { label: '玻璃陶瓷车针系列', en: 'Glass-Ceramic Burs', page: 'prod-glass', cat: '产品' },
-            { label: '氧化锆铣刀系列', en: 'Zirconia Milling Cutters', page: 'prod-zirconia', cat: '产品' },
-            { label: 'PMMA/蜡块铣刀', en: 'PMMA Cutters', page: 'prod-pmma', cat: '产品' },
-            { label: '配件与耗材', en: 'Accessories', page: 'prod-accessories', cat: '产品' },
+            { label: '氧化锆车针系列', en: 'Zirconia Burs', page: 'prod-zirconia', cat: '产品' },
+            { label: '树脂车针系列', en: 'Resin Burs', page: 'prod-pmma', cat: '产品' },
+            { label: '金属车针系列', en: 'Metal Burs', page: 'prod-accessories', cat: '产品' },
             { label: '技术优势', en: 'Technology', page: 'tech', cat: '页面' },
             { label: '设备兼容', en: 'Compatibility', page: 'compatibility', cat: '页面' },
             { label: '下载中心', en: 'Downloads', page: 'download', cat: '页面' },
@@ -1382,6 +1476,8 @@
             { label: 'ARUM', en: 'ARUM', page: 'compatibility', cat: '品牌' },
             ...carousels.glass.items.map(i => ({ label: i.label, en: i.label, page: 'prod-glass', cat: '玻璃陶瓷' })),
             ...carousels.zirconia.items.map(i => ({ label: i.label, en: i.label, page: 'prod-zirconia', cat: '氧化锆' })),
+            ...carousels.pmma.items.map(i => ({ label: i.label, en: i.label, page: 'prod-pmma', cat: '树脂' })),
+            ...carousels.accessories.items.map(i => ({ label: i.label, en: i.label, page: 'prod-accessories', cat: '金属' })),
         ];
 
         let searchOpen = false;
